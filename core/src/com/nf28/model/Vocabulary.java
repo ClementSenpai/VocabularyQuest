@@ -45,7 +45,7 @@ public class Vocabulary extends HashMap<String,String> {
         possible_answer[new Random().nextInt(number)]=get(key);
         List<String> values = new ArrayList<String>(values());
         for(int i=0;i<number -1;i++){
-            if(possible_answer[i]!=null){
+            if(possible_answer[i]==null){
                 possible_answer[i] = values.get(new Random().nextInt(values.size()));
                 values.remove(possible_answer[i]);
             }
