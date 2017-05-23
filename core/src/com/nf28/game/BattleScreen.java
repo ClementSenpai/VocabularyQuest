@@ -1,5 +1,6 @@
 package com.nf28.game;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
@@ -18,6 +20,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.nf28.model.Vocabulary;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Clément on 11/05/2017.
@@ -30,26 +37,29 @@ public class BattleScreen implements Screen {
     Stage stage;
     Table table;
     final TextButton map;
-    final TextArea badguyLife ;
-    final TextArea goodguyLife ;
-    final TextArea desc ;
-    TextArea currentWordTextArea ;
+    Label badguyLifeLabel ;
+    Label goodguyLifeLabel ;
+    Label desc ;
+    Label currentWordLabel ;
     Table answerTable;
     Vocabulary vocab = new Vocabulary();
     Image goodguyImage = new Image();
     Image badguyImage = new Image();
     String currentWord;
+    int badguylife=5;
+    int badguyMaxHP=5;
+    boolean isAttacking=true;
+    Map<TextButton,AnswerListener> answer_list= new HashMap<TextButton,AnswerListener>();
 
     public BattleScreen(final VocabularyQuest game){
         this.game = game;
-        currentWord =vocab.getWord();
         stage=new Stage();
+
         Gdx.input.setInputProcessor(stage);
         skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
-        badguyLife = new TextArea("Bad Guy Life",skin);
-        goodguyLife = new TextArea("Good Guy Life",skin);
-        currentWordTextArea = new TextArea(currentWord,skin);
-        desc = new TextArea("Attack/Defense",skin);
+        currentWord = vocab.getWord();
+        currentWordLabel = new Label(currentWord,skin);
+        desc = new Label("Attack",skin);
         table = new Table();
         table.debug();
         table.setFillParent(true);
@@ -57,32 +67,32 @@ public class BattleScreen implements Screen {
         badguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("tiles/character.png"))));
         goodguyImage.setScaling(Scaling.fit);
         badguyImage.setScaling(Scaling.fit);
-        table.add(goodguyLife).expandX();
-        table.add(badguyLife).expandX();
+        goodguyLifeLabel = new Label("",skin);
+        badguyLifeLabel = new Label("",skin);
+        table.add(goodguyLifeLabel).expandX();
+        table.add(badguyLifeLabel).expandX();
         table.row();
-        table.add(goodguyImage).expand().fill();
-        table.add(badguyImage).expand().fill();
+        table.add(goodguyImage).height(Value.percentHeight(.35F, table)).expandX().fill();
+        table.add(badguyImage).expandX().fill();;
         table.row();
         table.add(desc).colspan(2).expandX();
         table.row();
-        table.add(currentWordTextArea).height(Value.percentWidth(.30F, table)).expand().fill();
+        table.add(currentWordLabel).height(Value.percentHeight(.25F, table)).expandX().fill();
         answerTable = new Table();
-
-        for(String i: vocab.getResponse(currentWord,4)){
-            answerTable.add(new TextButton(i,skin)).expand().fill();
+        for(int i=0;i<4;i++) {
+            TextButton tb = new TextButton("", skin);
+            answerTable.add(tb).expand().fill();
+            AnswerListener al =  new AnswerListener();
+            answer_list.put(tb, al);
             answerTable.row();
+            tb.addListener(al);
         }
-        table.add(answerTable).expand().fill();
+        table.add(answerTable).fill();
         table.row();
         map =new TextButton("Map",skin);
-        table.add(map);
-        table.row();
-
-
-
-
-
+        table.add(map).colspan(2).expandX();
         stage.addActor(table);
+        refresh();
 
         map.addListener(new ClickListener(){
             @Override
@@ -100,6 +110,31 @@ public class BattleScreen implements Screen {
 
     }
 
+    public void buttonClicked(String i){
+            if (isAttacking && vocab.get(currentWord).equals(i))
+            badguylife--;
+        else if(!isAttacking && !vocab.get(currentWord).equals(i))
+            game.heros.setHp(game.heros.getHp()-1);
+        isAttacking = !isAttacking;
+        currentWord = vocab.getWord();
+        refresh();
+
+    }
+    public void refresh(){
+        if(isAttacking)
+            desc.setText("Attack");
+        else
+            desc.setText("Defense");
+        currentWordLabel.setText(currentWord);
+        badguyLifeLabel.setText(badguylife+"/"+badguyMaxHP);
+        goodguyLifeLabel.setText(game.heros.getHp()+"/"+game.heros.getMax_hp());
+        String[] answers = vocab.getResponse(currentWord,4);
+        int cpt=0;
+        for(Map.Entry<TextButton,AnswerListener> e : answer_list.entrySet()){
+            e.getKey().setText(answers[cpt]);
+            e.getValue().answer = answers[cpt++];
+        }
+    }
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1,1,1,1);
@@ -110,7 +145,6 @@ public class BattleScreen implements Screen {
         }*/
         stage.act(delta);
         stage.draw();
-        stage.setDebugAll(true);
     }
 
     @Override
@@ -136,5 +170,11 @@ public class BattleScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+    class AnswerListener extends  ClickListener{
+        public String answer;
+        public void clicked(InputEvent event, float x, float y) {
+            buttonClicked(answer);
+        }
     }
 }
