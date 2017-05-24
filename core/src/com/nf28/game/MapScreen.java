@@ -31,11 +31,11 @@ public class MapScreen implements Screen {
     Label coord;
 
     SpriteBatch batch;
-    Sprite wall_tiles = new Sprite(new Texture("tiles/wall64.png"));
     Sprite heros_sprite = new Sprite(new Texture("tiles/character.png"));
+    Sprite wall_tiles = new Sprite(new Texture("tiles/wall64.png"));
+    final int BUTTON_SIZE = 100;
     final int SQUARE_SIZE = 64;
     final int SQUARE_LINE = 10;
-    final int BUTTON_SIZE = 100;
 
     public MapScreen(final VocabularyQuest game){
         batch = new SpriteBatch();
@@ -137,11 +137,12 @@ public class MapScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-//        float squareWidth = camera.viewportWidth / squaresOnWidth;
+ //       float squareWidth = camera.viewportWidth / squaresOnWidth;
 //        float squareHeight = camera.viewportHeight / squaresOnHeight;
 //        wall_tiles.setWidth(squareWidth);
 //        wall_tiles.setHeight(squareHeight);
         batch.begin();
+
         int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
         int height = Gdx.graphics.getHeight();
         for (int y = 0 ; y < SQUARE_LINE; y++) {
@@ -151,6 +152,13 @@ public class MapScreen implements Screen {
                 wall_tiles.draw(batch);
             }
         }
+
+
+
+        //int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
+        //int height = Gdx.graphics.getHeight();
+
+        //Map map = new Map(batch);
 
         heros_sprite.setX(pad + game.heros.getCoord_x() * SQUARE_SIZE);
         heros_sprite.setY(height - pad - (game.heros.getCoord_y()+1) * SQUARE_SIZE);
