@@ -1,6 +1,8 @@
 package com.nf28.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -38,7 +40,7 @@ public class MainMenuScreen implements Screen {
         table.add(options).width(400).height(100).padTop(10).padBottom(3);
         table.row();
 
-        TextButton credits=new TextButton("Import",skin);
+        TextButton credits=new TextButton("Import",skin); //Why credits ??
         table.add(credits).width(400).height(100);
         table.row();
 
@@ -53,6 +55,33 @@ public class MainMenuScreen implements Screen {
                 startGame.addAction(Actions.fadeOut(0.7f));
                 game.mapScreen = new MapScreen(game);
                 game.setScreen(game.mapScreen);
+            }
+        });
+
+        credits.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                FileChooser files = new FileChooser("Choose Level File", skin) {
+                    @Override
+                    protected void result(Object object) {
+                        if (object.equals("OK")) {
+                            FileHandle file = getFile();
+                            // Do something with the file;
+                            //System.out.printf("You have chosen this file : ");
+                            Gdx.app.setLogLevel(Application.LOG_DEBUG);
+                            if (file != null) {
+                                Gdx.app.log(" FileChooser ", "You have chosen this file : " + file.name());
+                            }
+                            else {
+                                Gdx.app.log(" FileChooser ", " No file chosen ");
+                            }
+                        }
+                    }
+                };
+                files.setDirectory(new FileHandle(Gdx.files.getLocalStoragePath()));
+                files.getBackground().setMinHeight(640);  //TODO Scale with phone resolution
+                files.getBackground().setMinWidth(480);
+                files.show(stage);
             }
         });
 
