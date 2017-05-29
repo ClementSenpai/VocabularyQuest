@@ -94,15 +94,27 @@ public class BattleScreen implements Screen {
         stage.addActor(table);
         refresh();
 
-        map.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //map.addAction(Actions.fadeOut(0.7f));
-                game.setScreen(new MapScreen(game));
-                game.dispose();
-            }
-        });
+        if(badguylife==0) {
+            map.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //map.addAction(Actions.fadeOut(0.7f));
+                    game.setScreen(new MapScreen(game));
+                    game.dispose();
+                }
+            });
+        }
 
+        if(game.heros.getHp()==0){
+            map.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //map.addAction(Actions.fadeOut(0.7f));
+                    game.setScreen(new MainMenuScreen(game));
+                    game.dispose();
+                }
+            });
+        }
     }
 
     @Override
