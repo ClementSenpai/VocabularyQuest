@@ -10,7 +10,7 @@ public class Heros {
     int coord_x;
     int coord_y;
     int skin;
-    int exp
+    int exp;
 
     public Heros(){
         hp = 10;

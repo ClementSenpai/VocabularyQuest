@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -21,9 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.nf28.model.Vocabulary;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -94,7 +90,6 @@ public class BattleScreen implements Screen {
         stage.addActor(table);
         refresh();
 
-        if(badguylife==0) {
             map.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -103,18 +98,8 @@ public class BattleScreen implements Screen {
                     game.dispose();
                 }
             });
-        }
 
-        if(game.heros.getHp()==0){
-            map.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    //map.addAction(Actions.fadeOut(0.7f));
-                    game.setScreen(new MainMenuScreen(game));
-                    game.dispose();
-                }
-            });
-        }
+
     }
 
     @Override
@@ -146,6 +131,18 @@ public class BattleScreen implements Screen {
             e.getKey().setText(answers[cpt]);
             e.getValue().answer = answers[cpt++];
         }
+
+
+        if(badguylife==0){
+            game.setScreen(new MapScreen(game));
+            game.dispose();
+        }
+        if(game.heros.getHp()==0)
+        {
+            game.setScreen(new MainMenuScreen(game));
+            game.dispose();
+        }
+
     }
     @Override
     public void render(float delta) {
