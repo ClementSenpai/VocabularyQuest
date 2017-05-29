@@ -9,9 +9,17 @@ public class Tiles {
     boolean monster;
     Status status;
 
+    Tiles(Status s, boolean m){
+        seen = false;
+        monster = m;
+        status = s;
+    }
     public enum Status {
         plain,
         wall,
         nextfloor;
+    }
+    public void seen(){
+        seen = true;
     }
 }

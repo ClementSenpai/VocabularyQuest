@@ -37,6 +37,8 @@ public class MapScreen implements Screen {
     final int SQUARE_SIZE = 64;
     final int SQUARE_LINE = 10;
 
+
+
     public MapScreen(final VocabularyQuest game){
         batch = new SpriteBatch();
         this.game = game;
@@ -142,7 +144,7 @@ public class MapScreen implements Screen {
 //        wall_tiles.setWidth(squareWidth);
 //        wall_tiles.setHeight(squareHeight);
         batch.begin();
-
+/*
         int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
         int height = Gdx.graphics.getHeight();
         for (int y = 0 ; y < SQUARE_LINE; y++) {
@@ -152,13 +154,11 @@ public class MapScreen implements Screen {
                 wall_tiles.draw(batch);
             }
         }
+*/
+        game.displayMap(batch);
 
-
-
-        //int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
-        //int height = Gdx.graphics.getHeight();
-
-        //Map map = new Map(batch);
+        int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
+        int height = Gdx.graphics.getHeight();
 
         heros_sprite.setX(pad + game.heros.getCoord_x() * SQUARE_SIZE);
         heros_sprite.setY(height - pad - (game.heros.getCoord_y()+1) * SQUARE_SIZE);
