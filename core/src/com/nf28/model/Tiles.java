@@ -5,7 +5,32 @@ package com.nf28.model;
  */
 public class Tiles {
 
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
     boolean seen;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public boolean isMonster() {
+        return monster;
+    }
+
+    public void setMonster(boolean monster) {
+        this.monster = monster;
+    }
+
     boolean monster;
     Status status;
 

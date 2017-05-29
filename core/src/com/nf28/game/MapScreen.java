@@ -102,6 +102,7 @@ public class MapScreen implements Screen {
         button_left.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (game.heros.checkMove( game.heros.getCoord_x()-1, game.heros.getCoord_y(), game.map))
                 game.heros.setCoord_x(game.heros.getCoord_x()-1);
             }
         });
@@ -109,6 +110,7 @@ public class MapScreen implements Screen {
         button_up.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (game.heros.checkMove( game.heros.getCoord_x(), game.heros.getCoord_y()-1, game.map))
                 game.heros.setCoord_y(game.heros.getCoord_y()-1);
             }
         });
@@ -116,6 +118,7 @@ public class MapScreen implements Screen {
         button_down.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (game.heros.checkMove( game.heros.getCoord_x(), game.heros.getCoord_y()+1, game.map))
                 game.heros.setCoord_y(game.heros.getCoord_y()+ 1);
             }
         });
@@ -123,6 +126,7 @@ public class MapScreen implements Screen {
         button_right.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (game.heros.checkMove( game.heros.getCoord_x()+1, game.heros.getCoord_y(), game.map))
                 game.heros.setCoord_x(game.heros.getCoord_x()+ 1);
             }
         });
@@ -155,13 +159,19 @@ public class MapScreen implements Screen {
             }
         }
 */
-        game.displayMap(batch);
+
+
 
         int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
         int height = Gdx.graphics.getHeight();
 
         heros_sprite.setX(pad + game.heros.getCoord_x() * SQUARE_SIZE);
         heros_sprite.setY(height - pad - (game.heros.getCoord_y()+1) * SQUARE_SIZE);
+
+
+        game.updateMap(game.heros.getCoord_x() , game.heros.getCoord_y() );
+        game.displayMap(batch);
+
         heros_sprite.draw(batch);
 
         batch.end();

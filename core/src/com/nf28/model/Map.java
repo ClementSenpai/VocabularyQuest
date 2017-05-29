@@ -20,18 +20,14 @@ public class Map {
     Sprite unseen_tiles = new Sprite(new Texture("tiles/unseen64.png"));
 
     int size;
-    Tiles map[][];
+    Tiles tiles[][];
 
     public Map() {
 
         map_generation();
-    }
-
-    public Map(Batch batch)
-
-    {
+        size = SQUARE_LINE;
+        tiles = new Tiles[size][size];
         map_generation();
-        render_map(batch);
     }
 
     public void displayMap(Batch batch)
@@ -40,33 +36,32 @@ public class Map {
     }
 
     public void updateMap(int x, int y){
-        map[x][y].seen();
+        tiles[x][y].seen();
 
-        if(x-1> 0) map[x-1][y].seen();
-        if(x+1< SQUARE_LINE) map[x+1][y].seen();
-        if(y-1> 0) map[x][y-1].seen();
-        if(y+1< SQUARE_LINE) map[x][y+1].seen();
+        if(x-1>= 0) tiles[x-1][y].seen();
+        if(x+1< size) tiles[x+1][y].seen();
+        if(y-1>= 0) tiles[x][y-1].seen();
+        if(y+1< size) tiles[x][y+1].seen();
     }
 
     private void map_generation()
     {
-        map = new Tiles[SQUARE_LINE][SQUARE_LINE];
-        for (int y = 0 ; y < SQUARE_LINE; y++) {
-            for (int x = 0; x < SQUARE_LINE; x++) {
-                map[x][y] = new Tiles(Tiles.Status.plain, false);
+        for (int y = 0 ; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                tiles[x][y] = new Tiles(Tiles.Status.plain, false);
             }
         }
     }
 
     private void render_map(Batch batch)
     {
-        int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
+        int pad = (Gdx.graphics.getWidth()-size*SQUARE_SIZE) /2;
         int height = Gdx.graphics.getHeight();
 
-        for (int y = 0 ; y < SQUARE_LINE; y++) {
-            for (int x = 0; x < SQUARE_LINE ; x++) {
-                if(map[x][y].seen) {
-                    switch (map[x][y].status) {
+        for (int y = 0 ; y < size; y++) {
+            for (int x = 0; x < size ; x++) {
+                if(tiles[x][y].seen) {
+                    switch (tiles[x][y].status) {
                         case plain:
                             plain_tiles.setX(pad + x * SQUARE_SIZE);
                             plain_tiles.setY(height - pad - (y + 1) * SQUARE_SIZE);

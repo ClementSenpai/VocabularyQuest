@@ -20,6 +20,15 @@ public class Heros {
         skin = 0;
         exp = 0;
     }
+    public boolean checkMove(int x, int y, Map map){
+
+        return !( x < 0
+                || x >= map.size
+                || y < 0
+                || y >= map.size
+                || map.tiles[x][y].getStatus() == Tiles.Status.wall);
+
+    }
 
     public void setHp(int hp) {
         this.hp = hp;

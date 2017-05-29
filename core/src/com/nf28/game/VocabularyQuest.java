@@ -33,6 +33,10 @@ public class VocabularyQuest extends Game {
 
 	}
 
+
+    public void updateMap(int x, int y){
+        map.updateMap(x,y);
+    }
     public void displayMap(Batch b){
         map.displayMap(b);
     }
