@@ -10,6 +10,7 @@ public class Heros {
     int coord_x;
     int coord_y;
     int skin;
+    int exp
 
     public Heros(){
         hp = 10;
@@ -17,6 +18,7 @@ public class Heros {
         coord_x = 5;
         coord_y = 5;
         skin = 0;
+        exp = 0;
     }
 
     public void setHp(int hp) {
@@ -59,4 +61,8 @@ public class Heros {
         return hp;
 
     }
+
+    public void setExp(int exp) {this.exp = exp;}
+
+    public int getExp() {return exp;}
 }
