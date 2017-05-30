@@ -57,7 +57,8 @@ public class ShopScreen implements Screen {
         JsonValue json = new JsonReader().parse(text);
         JsonValue jsonobj = json.get("character");
         int cpt=1;
-        List price = new ArrayList();
+        List<Integer> price = new ArrayList<Integer>();
+        List<String> name = new ArrayList<String>();
         for (JsonValue o : jsonobj.iterator())
         {
             if(cpt==13)
@@ -65,14 +66,21 @@ public class ShopScreen implements Screen {
             Image test = new Image();
             test.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/"+o.getString("url")))));
             test.setScaling(Scaling.fit);
-            table.add(test).fill().expand();
+            table.add(test).fill().expand().colspan(2);
             price.add(o.getInt("price"));
+            name.add(o.getString("name"));
             if(cpt++%3==0){
                 table.row();
+                table.add(new Label(name.get(0),skin)).expandX();
                 table.add(new Label("" + price.get(0), skin)).expandX();
+                table.add(new Label(name.get(1),skin)).expandX();
                 table.add(new Label("" + price.get(1), skin)).expandX();
-                table.add(new Label("" + price.get(2), skin)).expandX();;
+                table.add(new Label(name.get(2),skin)).expandX();
+                table.add(new Label("" + price.get(2), skin)).expandX();
                 table.row();
+                name.remove(0);
+                name.remove(0);
+                name.remove(0);
                 price.remove(0);
                 price.remove(0);
                 price.remove(0);
@@ -83,7 +91,7 @@ public class ShopScreen implements Screen {
         final TextButton retour =new TextButton("Retour",skin);
         table.add(retour).expandX().fillX();
         table.row();
-        retour.addListener(new ClickListener(){
+        retour.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 retour.addAction(Actions.fadeOut(0.7f));
