@@ -31,7 +31,7 @@ public class MainMenuScreen implements Screen {
         skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
 
         Table table=new Table();
-        table.setSize(800,480);
+        table.setSize(800, 480);
 
         final TextButton startGame=new TextButton("Start game",skin);
         table.add(startGame).width(400).height(100);
@@ -49,6 +49,17 @@ public class MainMenuScreen implements Screen {
 
 
         stage.addActor(table);
+        options.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                /*
+                startGame.addAction(Actions.fadeOut(0.7f));
+                game.mapScreen = new MapScreen(game);
+                game.setScreen(game.mapScreen);*/
+
+                game.setScreen(new ShopScreen(game));
+            }
+        });
 
         startGame.addListener(new ClickListener(){
             @Override
