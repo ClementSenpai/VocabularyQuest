@@ -2,12 +2,13 @@ package com.nf28.game;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -52,7 +53,14 @@ public class MainMenuScreen implements Screen {
         startGame.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                /*
                 startGame.addAction(Actions.fadeOut(0.7f));
+                game.mapScreen = new MapScreen(game);
+                game.setScreen(game.mapScreen);*/
+
+                stage.getRoot().getColor().a = 1;
+                SequenceAction sequenceAction = new SequenceAction();
+                sequenceAction.addAction(Actions.fadeOut(0.5f));
                 game.mapScreen = new MapScreen(game);
                 game.setScreen(game.mapScreen);
             }

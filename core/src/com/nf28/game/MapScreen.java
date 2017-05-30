@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.nf28.model.Transition;
 
 /**
  * Created by Clément on 11/05/2017.
@@ -22,6 +23,9 @@ public class MapScreen implements Screen {
     Skin skin;
     VocabularyQuest game;
     Stage stage;
+    Transition transition;
+    boolean transition_start;
+
     final TextButton button_up;
     final TextButton button_down;
     final TextButton button_left;
@@ -41,9 +45,11 @@ public class MapScreen implements Screen {
 
     public MapScreen(final VocabularyQuest game){
         batch = new SpriteBatch();
+        transition = new Transition();
+        transition_start = false;
         this.game = game;
 
-
+        heros_sprite.setAlpha(255);
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
         skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
@@ -94,8 +100,9 @@ public class MapScreen implements Screen {
                 //battle.addAction(Actions.fadeOut(0.7f));
 
                 //game.battleScreen = new BattleScregen(game);
-                game.heros.setCoord_x(game.heros.getCoord_x()+1);
-                game.setScreen(new BattleScreen(game));
+                transition_start = true;
+                //game.heros.setCoord_x(game.heros.getCoord_x()+1);
+               // game.setScreen(new BattleScreen(game));
             }
         });
 
@@ -143,36 +150,33 @@ public class MapScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
- //       float squareWidth = camera.viewportWidth / squaresOnWidth;
-//        float squareHeight = camera.viewportHeight / squaresOnHeight;
-//        wall_tiles.setWidth(squareWidth);
-//        wall_tiles.setHeight(squareHeight);
         batch.begin();
-/*
-        int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
-        int height = Gdx.graphics.getHeight();
-        for (int y = 0 ; y < SQUARE_LINE; y++) {
-            for (int x = 0; x < SQUARE_LINE ; x++) {
-                wall_tiles.setX(pad + x * SQUARE_SIZE);
-                wall_tiles.setY(height - pad - (y+1) * SQUARE_SIZE);
-                wall_tiles.draw(batch);
-            }
+
+
+            int pad = (Gdx.graphics.getWidth() - SQUARE_LINE * SQUARE_SIZE) / 2;
+            int height = Gdx.graphics.getHeight();
+
+            heros_sprite.setX(pad + game.heros.getCoord_x() * SQUARE_SIZE);
+            heros_sprite.setY(height - pad - (game.heros.getCoord_y() + 1) * SQUARE_SIZE);
+
+
+            game.updateMap(game.heros.getCoord_x(), game.heros.getCoord_y());
+            game.displayMap(batch);
+
+            heros_sprite.draw(batch);
+
+        if (transition.getI() < 255)
+        {
+            transition.black_fadein(batch);
         }
-*/
-
-
-
-        int pad = (Gdx.graphics.getWidth()-SQUARE_LINE*SQUARE_SIZE) /2;
-        int height = Gdx.graphics.getHeight();
-
-        heros_sprite.setX(pad + game.heros.getCoord_x() * SQUARE_SIZE);
-        heros_sprite.setY(height - pad - (game.heros.getCoord_y()+1) * SQUARE_SIZE);
-
-
-        game.updateMap(game.heros.getCoord_x() , game.heros.getCoord_y() );
-        game.displayMap(batch);
-
-        heros_sprite.draw(batch);
+        else if (transition_start && transition.getJ() > 0)
+        {
+            transition.black_fadeout(batch);
+        }
+        else if (transition_start)
+        {
+            game.setScreen(new BattleScreen(game));
+        }
 
         batch.end();
 

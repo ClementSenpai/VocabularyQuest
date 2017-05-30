@@ -23,7 +23,6 @@ public class Map {
     Tiles tiles[][];
 
     public Map() {
-
         map_generation();
         size = SQUARE_LINE;
         tiles = new Tiles[size][size];
