@@ -69,7 +69,7 @@ public class Map {
     {
         Random rand = new Random();
         int n = rand.nextInt(3);
-        n = 0;
+        n = 1;
 
         for (int y = 0 ; y < size; y++) {
             for (int x = 0; x < size; x++) {
