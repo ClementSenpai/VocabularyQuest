@@ -59,7 +59,7 @@ public class BattleScreen implements Screen {
         table = new Table();
         table.debug();
         table.setFillParent(true);
-        goodguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("tiles/character.png"))));
+        goodguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
         badguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("tiles/character.png"))));
         goodguyImage.setScaling(Scaling.fit);
         badguyImage.setScaling(Scaling.fit);
@@ -68,8 +68,8 @@ public class BattleScreen implements Screen {
         table.add(goodguyLifeLabel).expandX();
         table.add(badguyLifeLabel).expandX();
         table.row();
-        table.add(goodguyImage).height(Value.percentHeight(.35F, table)).expandX().fill();
-        table.add(badguyImage).expandX().fill();;
+        table.add(goodguyImage).height(Value.percentHeight(.35F, table)).width(Value.percentWidth(.50F, table)).fill();
+        table.add(badguyImage).width(Value.percentWidth(.50F, table)).fill();
         table.row();
         table.add(desc).colspan(2).expandX();
         table.row();

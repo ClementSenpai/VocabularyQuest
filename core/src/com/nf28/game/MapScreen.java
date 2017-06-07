@@ -37,7 +37,7 @@ public class MapScreen implements Screen {
     Label coord;
 
     SpriteBatch batch;
-    Sprite heros_sprite = new Sprite(new Texture("tiles/character.png"));
+    Sprite heros_sprite;
     Sprite wall_tiles = new Sprite(new Texture("tiles/wall64.png"));
     final int BUTTON_SIZE = 100;
     final int SQUARE_SIZE = 64;
@@ -50,7 +50,8 @@ public class MapScreen implements Screen {
         transition = new Transition();
         transition_start = false;
         this.game = game;
-
+        heros_sprite = new Sprite(new Texture(game.heros.getImageUrl()));
+        heros_sprite.setSize(64,64);
         //heros_sprite.setAlpha(255);
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);

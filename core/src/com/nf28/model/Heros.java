@@ -11,6 +11,16 @@ public class Heros {
     int coord_y;
     int skin;
     int exp;
+    String imageUrl="tiles/character.png";
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+
+        return imageUrl;
+    }
 
     public Heros(){
         hp = 10;
