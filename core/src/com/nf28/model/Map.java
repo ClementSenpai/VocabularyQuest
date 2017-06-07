@@ -16,6 +16,25 @@ public class Map {
     final int MIN_SIZE = 7;
     final int SQUARE_SIZE = 64;
     final int SQUARE_LINE = 10;
+    int heros_coord_x;
+
+    public int getHeros_coord_y() {
+        return heros_coord_y;
+    }
+
+    public void setHeros_coord_y(int heros_coord_y) {
+        this.heros_coord_y = heros_coord_y;
+    }
+
+    public int getHeros_coord_x() {
+        return heros_coord_x;
+    }
+
+    public void setHeros_coord_x(int heros_coord_x) {
+        this.heros_coord_x = heros_coord_x;
+    }
+
+    int heros_coord_y;
 
     Sprite wall_tiles = new Sprite(new Texture("tiles/wall64.png"));
     Sprite plain_tiles = new Sprite(new Texture("tiles/plain64.png"));
@@ -61,8 +80,11 @@ public class Map {
                     tiles[x][y] = new Tiles(Tiles.Status.wall, false);
                 else if (MapTemplate.map[n][y][x] == 2)
                     tiles[x][y] = new Tiles(Tiles.Status.plain, true);
-                else if (MapTemplate.map[n][y][x] == 3)
+                else if (MapTemplate.map[n][y][x] == 3) {
                     tiles[x][y] = new Tiles(Tiles.Status.plain, false);
+                    heros_coord_x = x;
+                    heros_coord_y = y;
+                }
                 else if (MapTemplate.map[n][y][x] == 4)
                     tiles[x][y] = new Tiles(Tiles.Status.nextfloor, true);
             }

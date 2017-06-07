@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.nf28.model.Map;
+import com.nf28.model.Tiles;
 import com.nf28.model.Transition;
 
 /**
@@ -89,7 +91,8 @@ public class MapScreen implements Screen {
         tableStat.row();
 
 
-
+        game.heros.setCoord_x(game.map.getHeros_coord_x());
+        game.heros.setCoord_y(game.map.getHeros_coord_y());
 
 
         stage.addActor(table);
@@ -97,9 +100,6 @@ public class MapScreen implements Screen {
         battle.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //battle.addAction(Actions.fadeOut(0.7f));
-
-                //game.battleScreen = new BattleScregen(game);
                 transition_start = true;
                 //game.heros.setCoord_x(game.heros.getCoord_x()+1);
                // game.setScreen(new BattleScreen(game));
@@ -165,8 +165,17 @@ public class MapScreen implements Screen {
 
             heros_sprite.draw(batch);
 
-            if (game.map.tiles[game.heros.getCoord_x()][game.heros.getCoord_y()].isMonster())
+            if (game.map.tiles[game.heros.getCoord_x()][game.heros.getCoord_y()].isMonster()) {
+                game.map.tiles[game.heros.getCoord_x()][game.heros.getCoord_y()].setMonster(false);
+                game.map.setHeros_coord_x(game.heros.getCoord_x());
+                game.map.setHeros_coord_y(game.heros.getCoord_y());
                 game.setScreen(new BattleScreen(game));
+            }
+
+        if (game.map.tiles[game.heros.getCoord_x()][game.heros.getCoord_y()].getStatus() == Tiles.Status.nextfloor) {
+            game.map = new Map();
+            game.setScreen(new MapScreen(game));
+        }
 
 
         if (transition.getI() < 255)

@@ -52,11 +52,6 @@ public class MainMenuScreen implements Screen {
         options.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                /*
-                startGame.addAction(Actions.fadeOut(0.7f));
-                game.mapScreen = new MapScreen(game);
-                game.setScreen(game.mapScreen);*/
-
                 game.setScreen(new ShopScreen(game));
             }
         });
@@ -64,11 +59,6 @@ public class MainMenuScreen implements Screen {
         startGame.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                /*
-                startGame.addAction(Actions.fadeOut(0.7f));
-                game.mapScreen = new MapScreen(game);
-                game.setScreen(game.mapScreen);*/
-
                 stage.getRoot().getColor().a = 1;
                 SequenceAction sequenceAction = new SequenceAction();
                 sequenceAction.addAction(Actions.fadeOut(0.5f));
