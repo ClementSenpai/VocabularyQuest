@@ -49,7 +49,7 @@ public class MapScreen implements Screen {
         transition_start = false;
         this.game = game;
 
-        heros_sprite.setAlpha(255);
+        //heros_sprite.setAlpha(255);
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
         skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
@@ -164,6 +164,10 @@ public class MapScreen implements Screen {
             game.displayMap(batch);
 
             heros_sprite.draw(batch);
+
+            if (game.map.tiles[game.heros.getCoord_x()][game.heros.getCoord_y()].isMonster())
+                game.setScreen(new BattleScreen(game));
+
 
         if (transition.getI() < 255)
         {

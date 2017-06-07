@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.nf28.ressource.MapTemplate;
+
+import java.util.Random;
 
 /**
  * Created by Clément on 22/05/2017.
@@ -20,7 +23,7 @@ public class Map {
     Sprite unseen_tiles = new Sprite(new Texture("tiles/unseen64.png"));
 
     int size;
-    Tiles tiles[][];
+    public Tiles tiles[][];
 
     public Map() {
         map_generation();
@@ -45,9 +48,23 @@ public class Map {
 
     private void map_generation()
     {
+        Random rand = new Random();
+        int n = rand.nextInt(3);
+        n = 0;
+
         for (int y = 0 ; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                tiles[x][y] = new Tiles(Tiles.Status.plain, false);
+
+                if(MapTemplate.map[n][y][x] == 0)
+                    tiles[x][y] = new Tiles(Tiles.Status.plain, false);
+                else if (MapTemplate.map[n][y][x] == 1)
+                    tiles[x][y] = new Tiles(Tiles.Status.wall, false);
+                else if (MapTemplate.map[n][y][x] == 2)
+                    tiles[x][y] = new Tiles(Tiles.Status.plain, true);
+                else if (MapTemplate.map[n][y][x] == 3)
+                    tiles[x][y] = new Tiles(Tiles.Status.plain, false);
+                else if (MapTemplate.map[n][y][x] == 4)
+                    tiles[x][y] = new Tiles(Tiles.Status.nextfloor, true);
             }
         }
     }
