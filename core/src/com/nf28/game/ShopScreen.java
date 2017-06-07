@@ -98,7 +98,8 @@ public class ShopScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 retour.addAction(Actions.fadeOut(0.7f));
-                game.setScreen(game.mainMenuScreen);
+                game.setScreen(new MainMenuScreen(game));
+                game.dispose();
             }
         });
         button_left.addListener(new ClickListener() {
@@ -133,7 +134,9 @@ public class ShopScreen implements Screen {
         for(int i=0;i<9;i++){
             if(page * 9 + i == listPrice.size())
                 break;
-            imageList.get(i).setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/"+listUrl.get(page*9+i)))));
+            imageList.get(i).setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/" + listUrl.get(page * 9 + i)))));
+            String url=listUrl.get(page * 9 + i);
+            imageList.get(i).addListener(new buyListener(url));
             nameLabelList.get(i).setText(listName.get(page * 9 + i));
             priceLabelList.get(i).setText(listPrice.get(page * 9 + i));
         }
@@ -174,5 +177,15 @@ public class ShopScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+    class buyListener extends ClickListener{
+        String url;
+        public buyListener(String url){
+            this.url=url;
+        }
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+           game.heros.setImageUrl("character/"+this.url);
+        }
     }
 }

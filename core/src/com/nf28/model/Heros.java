@@ -12,7 +12,17 @@ public class Heros {
     int coord_y;
     int skin;
     int exp;
-    int dmg;
+
+    String imageUrl="tiles/character.png";
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+
+        return imageUrl;
+    }
 
     public Heros(){
         hp = 10;
@@ -22,7 +32,6 @@ public class Heros {
         skin = 0;
         exp = 0;
         level = 1;
-        dmg = 1;
     }
     public boolean checkMove(int x, int y, Map map){
 
