@@ -42,7 +42,6 @@ public class MapScreen implements Screen {
     final int BUTTON_SIZE = 100;
     final int SQUARE_SIZE = Gdx.graphics.getWidth()/11 ;
     final int SQUARE_LINE = 11;
-    int floor =0;
 
 
     public MapScreen(final VocabularyQuest game){
@@ -172,8 +171,8 @@ public class MapScreen implements Screen {
             }
 
         if (game.map.tiles[game.heros.getCoord_x()][game.heros.getCoord_y()].getStatus() == Tiles.Status.nextfloor) {
-            floor++;
-            game.map = new Map(floor);
+            game.floor++;
+            game.map = new Map(game.floor);
             game.setScreen(new MapScreen(game));
         }
 
