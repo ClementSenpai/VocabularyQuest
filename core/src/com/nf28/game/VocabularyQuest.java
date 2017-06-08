@@ -13,6 +13,7 @@ public class VocabularyQuest extends Game {
     Heros heros;
     Map map;
     int floor=0;
+    int or;
 
     @Override
     public void create () {
@@ -32,6 +33,15 @@ public class VocabularyQuest extends Game {
 	public void dispose () {
 
 	}
+
+    public int getOr() {
+        return or;
+    }
+
+    public void setOr(int or) {
+        this.or = or;
+    }
+
 
 
     public void updateMap(int x, int y){
