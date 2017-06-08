@@ -12,10 +12,8 @@ import java.util.Random;
  * Created by Clément on 22/05/2017.
  */
 public class Map {
-    final int MAX_SIZE = 10;
-    final int MIN_SIZE = 7;
-    final int SQUARE_SIZE = 64;
-    final int SQUARE_LINE = 10;
+     int SQUARE_SIZE = 0;
+     int SQUARE_LINE = 11;
     int heros_coord_x;
 
     public int getHeros_coord_y() {
@@ -44,11 +42,17 @@ public class Map {
     int size;
     public Tiles tiles[][];
 
-    public Map() {
-        map_generation();
+    public Map(int floor) {
+        wall_tiles.setSize(Gdx.graphics.getWidth()/11,Gdx.graphics.getWidth()/11);
+        plain_tiles.setSize(Gdx.graphics.getWidth()/11,Gdx.graphics.getWidth()/11);
+        nextfloor_tiles.setSize(Gdx.graphics.getWidth()/11,Gdx.graphics.getWidth()/11);
+        unseen_tiles.setSize(Gdx.graphics.getWidth()/11,Gdx.graphics.getWidth()/11);
+
+
+        this.SQUARE_SIZE = Gdx.graphics.getWidth()/11;
         size = SQUARE_LINE;
         tiles = new Tiles[size][size];
-        map_generation();
+        map_generation(floor);
     }
 
     public void displayMap(Batch batch)
@@ -58,34 +62,30 @@ public class Map {
 
     public void updateMap(int x, int y){
         tiles[x][y].seen();
-
         if(x-1>= 0) tiles[x-1][y].seen();
         if(x+1< size) tiles[x+1][y].seen();
         if(y-1>= 0) tiles[x][y-1].seen();
         if(y+1< size) tiles[x][y+1].seen();
     }
 
-    private void map_generation()
+    private void map_generation(int floor)
     {
-        Random rand = new Random();
-        int n = rand.nextInt(3);
-        n = 0;
-
+        int map[][] = new MapTemplate().generateNextFloor(floor);
+        new MapTemplate().aff(map);
         for (int y = 0 ; y < size; y++) {
             for (int x = 0; x < size; x++) {
-
-                if(MapTemplate.map[n][y][x] == 0)
+                if(map[y][x] == 0)
                     tiles[x][y] = new Tiles(Tiles.Status.plain, false);
-                else if (MapTemplate.map[n][y][x] == 1)
+                else if (map[y][x] == 1)
                     tiles[x][y] = new Tiles(Tiles.Status.wall, false);
-                else if (MapTemplate.map[n][y][x] == 2)
+                else if (map[y][x] == 2)
                     tiles[x][y] = new Tiles(Tiles.Status.plain, true);
-                else if (MapTemplate.map[n][y][x] == 3) {
+                else if (map[y][x] == 3) {
                     tiles[x][y] = new Tiles(Tiles.Status.plain, false);
                     heros_coord_x = x;
                     heros_coord_y = y;
                 }
-                else if (MapTemplate.map[n][y][x] == 4)
+                else if (map[y][x] == 4)
                     tiles[x][y] = new Tiles(Tiles.Status.nextfloor, true);
             }
         }

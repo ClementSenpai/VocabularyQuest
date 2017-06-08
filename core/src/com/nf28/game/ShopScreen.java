@@ -115,8 +115,10 @@ public class ShopScreen implements Screen {
         button_right.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                currentPage++;
-                refresh(currentPage);
+                if(currentPage+1<=listPrice.size()/9) {
+                    currentPage++;
+                    refresh(currentPage);
+                }
             }
         });
         stage.addActor(table);

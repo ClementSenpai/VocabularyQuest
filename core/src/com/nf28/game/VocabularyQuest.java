@@ -12,12 +12,12 @@ public class VocabularyQuest extends Game {
     BattleScreen battleScreen;
     Heros heros;
     Map map;
-
+    int floor=0;
 
     @Override
     public void create () {
         heros = new Heros();
-        map = new Map();
+        map = new Map(floor);
         mainMenuScreen = new MainMenuScreen(this);
         setScreen(mainMenuScreen);
     }

@@ -40,9 +40,9 @@ public class MapScreen implements Screen {
     Sprite heros_sprite;
     Sprite wall_tiles = new Sprite(new Texture("tiles/wall64.png"));
     final int BUTTON_SIZE = 100;
-    final int SQUARE_SIZE = 64;
-    final int SQUARE_LINE = 10;
-
+    final int SQUARE_SIZE = Gdx.graphics.getWidth()/11 ;
+    final int SQUARE_LINE = 11;
+    int floor =0;
 
 
     public MapScreen(final VocabularyQuest game){
@@ -51,15 +51,13 @@ public class MapScreen implements Screen {
         transition_start = false;
         this.game = game;
         heros_sprite = new Sprite(new Texture(game.heros.getImageUrl()));
-        heros_sprite.setSize(64,64);
-        //heros_sprite.setAlpha(255);
+        heros_sprite.setSize(Gdx.graphics.getWidth()/11,Gdx.graphics.getWidth()/11);
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
         skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
 
 
         Table table=new Table();
-        //table.setSize(800,480);
         table.setSize(Gdx.graphics.getWidth() - SQUARE_LINE * SQUARE_LINE,Gdx.graphics.getHeight());
         table.bottom();
 
@@ -174,7 +172,8 @@ public class MapScreen implements Screen {
             }
 
         if (game.map.tiles[game.heros.getCoord_x()][game.heros.getCoord_y()].getStatus() == Tiles.Status.nextfloor) {
-            game.map = new Map();
+            floor++;
+            game.map = new Map(floor);
             game.setScreen(new MapScreen(game));
         }
 
