@@ -11,6 +11,7 @@ public class Monster {
     int vie;
     int attaque;
     int exp;
+    int or;
 
     String imageUrl;
 
@@ -18,6 +19,7 @@ public class Monster {
         vie = MonsterTemplate.vie[floor];
         attaque = MonsterTemplate.attaque[floor];
         exp = MonsterTemplate.exp[floor];
+        or = MonsterTemplate.or[floor];
         imageUrl = "character/monster"+new Random().nextInt(1)+".png";
     }
 
@@ -52,6 +54,15 @@ public class Monster {
 
     public void setExp(int exp) {
         this.exp = exp;
+    }
+
+
+    public int getOr() {
+        return or;
+    }
+
+    public void setOr(int or) {
+        this.or = or;
     }
 
 

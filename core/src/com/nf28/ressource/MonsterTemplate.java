@@ -4,6 +4,7 @@ package com.nf28.ressource;
  * Created by Clément on 07/06/2017.
  */
 public class MonsterTemplate {
+    public final static int etage_max = 20;
 
     public static int attaque[] = {
             1,
@@ -84,5 +85,30 @@ public class MonsterTemplate {
             350
     };
 
+    public static int or[] = {
+            1,
+            2,
+            3,
+            4,
+            5,
+
+            5,
+            5,
+            5,
+            6,
+            7,
+
+            8,
+            9,
+            10,
+            10,
+            10,
+
+            11,
+            12,
+            13,
+            14,
+            15
+    };
 
 }

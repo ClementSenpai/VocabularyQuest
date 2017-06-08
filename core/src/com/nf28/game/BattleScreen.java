@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -24,7 +22,6 @@ import com.nf28.ressource.HerosTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by Clément on 11/05/2017.
@@ -149,6 +146,7 @@ public class BattleScreen implements Screen {
             game.heros.setExp(game.heros.getExp() + monster.getExp());
             if(game.heros.getExp() >= HerosTemplate.palier_exp[game.heros.getLevel() ])
                 game.heros.levelUp();
+            game.setOr(game.getOr() + monster.getOr() );
             game.setScreen(new MapScreen(game));
             game.dispose();
         }
