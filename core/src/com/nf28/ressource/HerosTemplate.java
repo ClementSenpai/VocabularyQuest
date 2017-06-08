@@ -7,6 +7,7 @@ public class HerosTemplate {
     public final static int level_max = 20;
 
     public static int palier_exp[] = {
+                0,
                 5,
                 10,
                 20,
@@ -33,6 +34,7 @@ public class HerosTemplate {
     };
 
     public static int attaque[] = {
+            0,
             1,
             2,
             3,
@@ -59,6 +61,7 @@ public class HerosTemplate {
     };
 
     public static int vie[] = {
+            0,
             10,
             12,
             15,

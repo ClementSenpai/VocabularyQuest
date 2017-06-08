@@ -143,4 +143,10 @@ public class MapTemplate {
     public static void main(String[] args) {
         new MapTemplate().aff(new MapTemplate().generateNextFloor(0));
     }
+
+    // 0 plain
+    // 1 wall
+    // 2 monster
+    // 3 start
+    // 4 nextfloor
 }

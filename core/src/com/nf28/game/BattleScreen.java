@@ -18,7 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
+import com.nf28.model.Monster;
 import com.nf28.model.Vocabulary;
+import com.nf28.ressource.HerosTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,10 +48,12 @@ public class BattleScreen implements Screen {
     int badguylife=5;
     int badguyMaxHP=5;
     boolean isAttacking=true;
+    Monster monster;
     Map<TextButton,AnswerListener> answer_list= new HashMap<TextButton,AnswerListener>();
 
     public BattleScreen(final VocabularyQuest game){
         this.game = game;
+        monster = new Monster(game.floor);
         stage=new Stage();
 
         Gdx.input.setInputProcessor(stage);
@@ -60,7 +64,10 @@ public class BattleScreen implements Screen {
         table = new Table();
         table.setFillParent(true);
         goodguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
-        badguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/monster" + new Random().nextInt(1)+".png"))));
+
+        badguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(monster.getImageUrl()))));
+        badguylife=monster.getVie();
+        badguyMaxHP=monster.getVie();
         goodguyImage.setScaling(Scaling.fit);
         badguyImage.setScaling(Scaling.fit);
         goodguyLifeLabel = new Label("",skin);
@@ -109,12 +116,12 @@ public class BattleScreen implements Screen {
 
     public void buttonClicked(String i){
             if (isAttacking && vocab.get(currentWord).equals(i)) {
-                badguylife--;
+                badguylife-= HerosTemplate.attaque[game.heros.getLevel()];
                 badguyImage.activate();
 
             }
         else if(!isAttacking && !vocab.get(currentWord).equals(i)) {
-                game.heros.setHp(game.heros.getHp() - 1);
+                game.heros.setHp(game.heros.getHp()-monster.getAttaque());
                 goodguyImage.activate();
             }
         isAttacking = !isAttacking;
@@ -139,6 +146,9 @@ public class BattleScreen implements Screen {
 
 
         if(badguylife==0){
+            game.heros.setExp(game.heros.getExp() + monster.getExp());
+            if(game.heros.getExp() >= HerosTemplate.palier_exp[game.heros.getLevel() ])
+                game.heros.levelUp();
             game.setScreen(new MapScreen(game));
             game.dispose();
         }

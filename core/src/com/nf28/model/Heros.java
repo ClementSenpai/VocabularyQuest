@@ -1,11 +1,14 @@
 package com.nf28.model;
 
+import com.nf28.ressource.HerosTemplate;
+
 /**
  * Created by Clément on 11/05/2017.
  */
 public class Heros {
 
     int hp;
+
     int level;
     int max_hp;
     int coord_x;
@@ -25,10 +28,10 @@ public class Heros {
     }
 
     public Heros(){
-        hp = 10;
-        max_hp = 10;
-        coord_x = 5;
-        coord_y = 5;
+
+        level = 1;
+        hp = HerosTemplate.vie[level];
+        max_hp = HerosTemplate.vie[level];
         skin = 0;
         exp = 0;
         level = 1;
@@ -40,6 +43,13 @@ public class Heros {
                 || y < 0
                 || y >= map.size
                 || map.tiles[x][y].getStatus() == Tiles.Status.wall);
+
+    }
+
+    public void levelUp(){
+        level ++;
+        hp = HerosTemplate.vie[level];
+        max_hp = HerosTemplate.vie[level];
 
     }
 
@@ -79,6 +89,15 @@ public class Heros {
         this.skin = skin;
     }
 
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public int getHp() {
         return hp;
 
@@ -87,4 +106,6 @@ public class Heros {
     public void setExp(int exp) {this.exp = exp;}
 
     public int getExp() {return exp;}
+
+
 }
