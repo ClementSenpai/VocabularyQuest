@@ -72,6 +72,7 @@ public class Map {
     {
         int map[][] = new MapTemplate().generateNextFloor(floor);
         new MapTemplate().aff(map);
+
         for (int y = 0 ; y < size; y++) {
             for (int x = 0; x < size; x++) {
                 if(map[y][x] == 0)

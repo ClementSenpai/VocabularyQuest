@@ -6,11 +6,13 @@ package com.nf28.model;
 public class Heros {
 
     int hp;
+    int level;
     int max_hp;
     int coord_x;
     int coord_y;
     int skin;
     int exp;
+
     String imageUrl="tiles/character.png";
 
     public void setImageUrl(String imageUrl) {
@@ -29,6 +31,7 @@ public class Heros {
         coord_y = 5;
         skin = 0;
         exp = 0;
+        level = 1;
     }
     public boolean checkMove(int x, int y, Map map){
 
