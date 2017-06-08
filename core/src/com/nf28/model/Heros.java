@@ -13,7 +13,7 @@ public class Heros {
     int skin;
     int exp;
 
-    String imageUrl="tiles/character.png";
+    String imageUrl="character/character.png";
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;

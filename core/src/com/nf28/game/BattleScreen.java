@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -21,12 +22,12 @@ import com.nf28.model.Vocabulary;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Clément on 11/05/2017.
  */
 public class BattleScreen implements Screen {
-
 
     Skin skin;
     VocabularyQuest game;
@@ -39,8 +40,8 @@ public class BattleScreen implements Screen {
     Label currentWordLabel ;
     Table answerTable;
     Vocabulary vocab = new Vocabulary();
-    Image goodguyImage = new Image();
-    Image badguyImage = new Image();
+    BlinkImage goodguyImage = new BlinkImage();
+    BlinkImage badguyImage = new BlinkImage();
     String currentWord;
     int badguylife=5;
     int badguyMaxHP=5;
@@ -57,10 +58,9 @@ public class BattleScreen implements Screen {
         currentWordLabel = new Label(currentWord,skin);
         desc = new Label("Attack",skin);
         table = new Table();
-        table.debug();
         table.setFillParent(true);
         goodguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
-        badguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("tiles/character.png"))));
+        badguyImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/monster" + new Random().nextInt(1)+".png"))));
         goodguyImage.setScaling(Scaling.fit);
         badguyImage.setScaling(Scaling.fit);
         goodguyLifeLabel = new Label("",skin);
@@ -108,10 +108,15 @@ public class BattleScreen implements Screen {
     }
 
     public void buttonClicked(String i){
-            if (isAttacking && vocab.get(currentWord).equals(i))
-            badguylife--;
-        else if(!isAttacking && !vocab.get(currentWord).equals(i))
-            game.heros.setHp(game.heros.getHp()-1);
+            if (isAttacking && vocab.get(currentWord).equals(i)) {
+                badguylife--;
+                badguyImage.activate();
+
+            }
+        else if(!isAttacking && !vocab.get(currentWord).equals(i)) {
+                game.heros.setHp(game.heros.getHp() - 1);
+                goodguyImage.activate();
+            }
         isAttacking = !isAttacking;
         currentWord = vocab.getWord();
         refresh();

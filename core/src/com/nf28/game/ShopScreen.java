@@ -37,6 +37,7 @@ public class ShopScreen implements Screen {
     VocabularyQuest game;
     Stage stage;
     int currentPage = 0;
+    Image current;
     List<String> listUrl = new ArrayList<String>();
     List<String> listPrice = new ArrayList<String>();
     List<String> listName = new ArrayList<String>();
@@ -56,7 +57,6 @@ public class ShopScreen implements Screen {
         table.setFillParent(true);
         FileHandle file = Gdx.files.internal("character/character_list.json");
         String text = file.readString();
-        table.setDebug(true);
         JsonValue json = new JsonReader().parse(text);
         JsonValue jsonobj = json.get("character");
         int cpt=1;
@@ -91,8 +91,11 @@ public class ShopScreen implements Screen {
         table.add(button_left).height(100).expand().fill();
         TextButton button_right =new TextButton(">",skin);
         table.add(button_right).height(100).expand().fill();
+        current = new Image();
+        current.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
+        table.add(current).colspan(2);;
         final TextButton retour =new TextButton("Retour",skin);
-        table.add(retour).expand().fill();
+        table.add(retour).expand().fill().colspan(2);;
         table.row();
         retour.addListener(new ClickListener() {
             @Override
@@ -138,7 +141,7 @@ public class ShopScreen implements Screen {
                 break;
             imageList.get(i).setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/" + listUrl.get(page * 9 + i)))));
             String url=listUrl.get(page * 9 + i);
-            imageList.get(i).addListener(new buyListener(url));
+            imageList.get(i).addListener(new buyListener(url,imageList.get(i)));
             nameLabelList.get(i).setText(listName.get(page * 9 + i));
             priceLabelList.get(i).setText(listPrice.get(page * 9 + i));
         }
@@ -182,12 +185,17 @@ public class ShopScreen implements Screen {
     }
     class buyListener extends ClickListener{
         String url;
-        public buyListener(String url){
+        Image image;
+        public buyListener(String url,Image image){
             this.url=url;
+            this.url=url;
+            this.image=image;
+
         }
         @Override
         public void clicked(InputEvent event, float x, float y) {
            game.heros.setImageUrl("character/"+this.url);
+            current.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
         }
     }
 }
