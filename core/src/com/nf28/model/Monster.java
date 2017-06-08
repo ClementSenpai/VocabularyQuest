@@ -20,7 +20,7 @@ public class Monster {
         attaque = MonsterTemplate.attaque[floor];
         exp = MonsterTemplate.exp[floor];
         or = MonsterTemplate.or[floor];
-        imageUrl = "character/monster"+new Random().nextInt(1)+".png";
+        imageUrl = "character/monster"+new Random().nextInt(2)+".png";
     }
 
     public String getImageUrl() {
