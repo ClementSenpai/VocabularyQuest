@@ -59,7 +59,7 @@ public class MainMenuScreen implements Screen {
         table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.bottom();
 
-        final SelectBox<String> listVoc = new SelectBox<String>(skin);
+        final SelectBox<String> listVoc = new SelectBox<String>(new Skin( Gdx.files.internal( "ui/defaultskin.json" )));
         Array<String> lists = FileLoader.loadFilesNames();
         listVoc.setItems(lists);
         table.add(listVoc).width(200).height(100).left().top();
