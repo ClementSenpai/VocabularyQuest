@@ -120,8 +120,8 @@ public class MainMenuScreen implements Screen {
                     }
                 };
                 // If emulator use Local StoragePath
-                files.setDirectory(new FileHandle(Gdx.files.getLocalStoragePath()));
-                //files.setDirectory(new FileHandle(Gdx.files.getExternalStoragePath()));
+                //files.setDirectory(new FileHandle(Gdx.files.getLocalStoragePath()));
+                files.setDirectory(new FileHandle(Gdx.files.getExternalStoragePath()));
                 files.getBackground().setMinHeight(640);  //TODO Scale with phone resolution
                 files.getBackground().setMinWidth(480);
                 files.show(stage);
