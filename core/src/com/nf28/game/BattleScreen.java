@@ -175,6 +175,7 @@ public class BattleScreen implements Screen {
         }
         if(game.heros.getHp()<=0)
         {
+            game.resetGame();
             game.setScreen(new MainMenuScreen(game));
             game.dispose();
         }

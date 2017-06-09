@@ -64,6 +64,7 @@ public class MapScreen implements Screen {
 
         Table table=new Table();
         table.setSize(Gdx.graphics.getWidth() - (SQUARE_LINE +1)* SQUARE_LINE,Gdx.graphics.getHeight());
+        table.setTransform(true);
         table.bottom().right();
 
 
@@ -74,8 +75,9 @@ public class MapScreen implements Screen {
 
 
 
-        button_up =new TextButton("^",skin);
+        button_up =new TextButton("<",skin);
         table.add(button_up ).width(BUTTON_SIZE).height(BUTTON_SIZE).padLeft(BUTTON_SIZE);
+        //button_up.addAction(Actions.rotateBy(90, 1));
         button_up.getLabel().setFontScale(5);
         table.row();
         button_left =new TextButton("<",skin);
@@ -85,9 +87,10 @@ public class MapScreen implements Screen {
         table.add(button_right).width(BUTTON_SIZE).height(BUTTON_SIZE);
         button_right.getLabel().setFontScale(5);
         table.row();
-        button_down =new TextButton("v",skin);
+        button_down =new TextButton(">",skin);
         table.add(button_down ).width(BUTTON_SIZE).height(BUTTON_SIZE).padLeft(BUTTON_SIZE);
         button_down.getLabel().setFontScale(5);
+        button_down.setRotation(90);
         table.row();
 
         battle =new TextButton("battle",skin);
