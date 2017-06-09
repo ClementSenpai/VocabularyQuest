@@ -49,6 +49,12 @@ public class VocabularyQuest extends Game {
     }
 
 
+    public void resetGame(){
+        heros = new Heros();
+        floor = 0;
+        map = new Map(floor);
+
+    }
 
     public void updateMap(int x, int y){
         map.updateMap(x,y);
