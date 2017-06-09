@@ -22,6 +22,7 @@ import com.nf28.model.Monster;
 import com.nf28.model.Vocabulary;
 import com.nf28.ressource.HerosTemplate;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,6 +56,15 @@ public class BattleScreen implements Screen {
 
     public BattleScreen(final VocabularyQuest game){
         this.game = game;
+        try {
+            Gdx.app.log(" BattleScreen ", FileLoader.loadDefaultFile().name());
+            vocab = FileLoader.loadDefaultList();
+            for (String key : vocab.values()){
+                Gdx.app.log(" BattleScreen ", "key : " + key);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         batch = new SpriteBatch();
         monster = new Monster(game.floor);
         stage=new Stage();

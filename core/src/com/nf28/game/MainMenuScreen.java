@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,10 +13,18 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
+import com.nf28.model.Vocabulary;
+
+import java.io.IOException;
 
 /**
  * Created by Clément on 11/05/2017.
@@ -44,9 +53,17 @@ public class MainMenuScreen implements Screen {
 
         main_screen.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
+
+
         Table table=new Table();
         table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.bottom();
+
+        final SelectBox<String> listVoc = new SelectBox<String>(new Skin( Gdx.files.internal( "ui/defaultskin.json" )));
+        Array<String> lists = FileLoader.loadFilesNames();
+        listVoc.setItems(lists);
+        table.add(listVoc).width(200).height(100).left().top();
+        table.row();
 
         final TextButton startGame=new TextButton("Start game",skin);
         table.add(startGame).width(WIDTH_BUTTON).height(HEIGHT_BUTTON);
@@ -59,8 +76,6 @@ public class MainMenuScreen implements Screen {
         TextButton credits=new TextButton("Import",skin); //Why credits ??
         table.add(credits).width(WIDTH_BUTTON).height(HEIGHT_BUTTON);
         table.row();
-
-
 
 
         stage.addActor(table);
@@ -85,28 +100,65 @@ public class MainMenuScreen implements Screen {
         credits.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                FileChooser files = new FileChooser("Choose Level File", skin) {
+                FileChooser files = new FileChooser("Choose The List File", skin) {
                     @Override
                     protected void result(Object object) {
                         if (object.equals("OK")) {
                             FileHandle file = getFile();
-                            // Do something with the file;
-                            //System.out.printf("You have chosen this file : ");
                             Gdx.app.setLogLevel(Application.LOG_DEBUG);
                             if (file != null) {
+                                FileSaver.saveFile(file);
+                                listVoc.setItems(FileLoader.loadFilesNames());
+                                try {
+                                    Vocabulary listeVocabulaire = FileLoader.parseFile(file);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 Gdx.app.log(" FileChooser ", "You have chosen this file : " + file.name());
-                            }
-                            else {
-                                Gdx.app.log(" FileChooser ", " No file chosen ");
                             }
                         }
                     }
                 };
+                // If emulator use Local StoragePath
                 files.setDirectory(new FileHandle(Gdx.files.getLocalStoragePath()));
+                //files.setDirectory(new FileHandle(Gdx.files.getExternalStoragePath()));
                 files.getBackground().setMinHeight(640);  //TODO Scale with phone resolution
                 files.getBackground().setMinWidth(480);
                 files.show(stage);
             }
+        });
+
+        listVoc.addListener(new ChangeListener() {
+           @Override
+           public void changed(ChangeEvent event, Actor actor) {
+               FileHandleView fileOptions = new FileHandleView("Select an action", skin, Gdx.files.local(listVoc.getSelected())){
+                   @Override
+                   protected void result(Object object){
+                       if (object.equals("Load")){
+                           FileSaver.saveDefaultFile(listVoc.getSelected());
+                       }
+                       else if (object.equals("Remove")){
+                           ErrorDialog errorDialog = new ErrorDialog("Error", skin, new Label("Do you really want to remove " + listVoc.getSelected(), skin)) {
+                               @Override
+                               protected void result(Object object) {
+                                   if (object.equals("OK")){
+                                       FileSaver.removeFile(listVoc.getSelected());
+                                       listVoc.setItems(FileLoader.loadFilesNames());
+                                   }
+                               }
+                           };
+                           errorDialog.showMessage();
+                           errorDialog.getBackground().setMinWidth(150);
+                           errorDialog.getBackground().setMinHeight(100);
+                           errorDialog.show(getStage());
+                       }
+
+                   }
+               };
+               fileOptions.getBackground().setMinWidth(320);
+               fileOptions.getBackground().setMinHeight(240);
+               fileOptions.show(stage);
+           }
         });
 
     }
