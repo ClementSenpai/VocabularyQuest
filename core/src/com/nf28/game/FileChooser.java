@@ -89,7 +89,7 @@ public class FileChooser extends Dialog {
             }
         });
         ScrollPane pane = new ScrollPane(null, skin);
-        Table table = new Table().top().left();
+        final Table table = new Table().top().left();
         table.defaults().left();
         ClickListener fileClickListener = new ClickListener(){
             @Override
@@ -102,11 +102,31 @@ public class FileChooser extends Dialog {
                     if (handle.isDirectory()) {
                         setDirectory(handle);
                     } else {
-                        setFile(handle);
+                        if (!FileLoader.checkFile(handle)){
+                            /*Gdx.app.log("FileChooser", " Check Failed ");
+                            table.row();
+                            Label error_message = new Label("A Problem has occurred : Please check your file", skin);
+                            table.add(error_message);*/
+                            ErrorDialog errorDialog = new ErrorDialog("Error", skin, new Label("File could not be read, please see if it is a semicolon separated file", skin));
+                            errorDialog.showMessage();
+                            errorDialog.getBackground().setMinWidth(150);
+                            errorDialog.getBackground().setMinHeight(100);
+                            errorDialog.show(getStage());
+
+                        }
+                        else {
+                            Gdx.app.log("FileChooser", " Check Success ");
+                            setFile(handle);
+                        }
                     }
                 }
             }
         };
+
+        table.row();
+        Label current_dir = new Label(
+                "Current Directory :" + this.directory.path(), skin);
+        table.add(current_dir);
         table.row();
         Label label = new Label("..", skin);
         label.setName("..");
@@ -115,7 +135,7 @@ public class FileChooser extends Dialog {
         for (FileHandle file : files) {
             Gdx.app.setLogLevel(Application.LOG_DEBUG);
             if (file.exists()) {
-                Gdx.app.log(" File Name : ", file.name());
+                Gdx.app.log(" File Name : ", file.path());
             }
             else {
                 Gdx.app.log(" File Name : ", " Null ");
