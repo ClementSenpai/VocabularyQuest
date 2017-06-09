@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Scaling;
 import com.nf28.model.Map;
 import com.nf28.model.Tiles;
 import com.nf28.model.Transition;
@@ -39,9 +42,10 @@ public class MapScreen implements Screen {
     SpriteBatch batch;
     Sprite heros_sprite;
     Sprite wall_tiles = new Sprite(new Texture("tiles/wall64.png"));
-    final int BUTTON_SIZE = 100;
-    final int SQUARE_SIZE = Gdx.graphics.getWidth()/11 ;
+    BlinkImage heart = new BlinkImage();
     final int SQUARE_LINE = 11;
+    final int SQUARE_SIZE = Gdx.graphics.getWidth()/SQUARE_LINE ;
+    final int BUTTON_SIZE = ( Gdx.graphics.getHeight() - (SQUARE_LINE +1) * SQUARE_SIZE) / 3;
 
 
     public MapScreen(final VocabularyQuest game){
@@ -50,42 +54,57 @@ public class MapScreen implements Screen {
         transition_start = false;
         this.game = game;
         heros_sprite = new Sprite(new Texture(game.heros.getImageUrl()));
-        heros_sprite.setSize(Gdx.graphics.getWidth()/11,Gdx.graphics.getWidth()/11);
+        heros_sprite.setSize(SQUARE_SIZE,SQUARE_SIZE);
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
-        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+//        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+        //skin = new Skin( Gdx.files.internal( "skin/sgx/skin/sgx-ui.json" ));
 
+        skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
 
         Table table=new Table();
-        table.setSize(Gdx.graphics.getWidth() - SQUARE_LINE * SQUARE_LINE,Gdx.graphics.getHeight());
-        table.bottom();
+        table.setSize(Gdx.graphics.getWidth() - (SQUARE_LINE +1)* SQUARE_LINE,Gdx.graphics.getHeight());
+        table.bottom().right();
+
+
+        Table tableStat=new Table();
+        tableStat.setSize(Gdx.graphics.getWidth() , SQUARE_SIZE);
+        tableStat.setPosition(0, Gdx.graphics.getHeight()- (SQUARE_LINE +1)* SQUARE_SIZE);
+        tableStat.left();
+
 
 
         button_up =new TextButton("^",skin);
         table.add(button_up ).width(BUTTON_SIZE).height(BUTTON_SIZE).padLeft(BUTTON_SIZE);
+        button_up.getLabel().setFontScale(5);
         table.row();
         button_left =new TextButton("<",skin);
         table.add(button_left ).width(BUTTON_SIZE).height(BUTTON_SIZE).padRight(BUTTON_SIZE);
+        button_left.getLabel().setFontScale(5);
         button_right =new TextButton(">",skin);
         table.add(button_right).width(BUTTON_SIZE).height(BUTTON_SIZE);
+        button_right.getLabel().setFontScale(5);
         table.row();
         button_down =new TextButton("v",skin);
         table.add(button_down ).width(BUTTON_SIZE).height(BUTTON_SIZE).padLeft(BUTTON_SIZE);
+        button_down.getLabel().setFontScale(5);
         table.row();
 
         battle =new TextButton("battle",skin);
-        table.add(battle);//.width(400).height(100);
+        //table.add(battle);//.width(400).height(100);
         table.row();
 
-        Table tableStat=new Table();
-        tableStat.setSize(200,2000);
 
-        hp =new Label(game.heros.getHp() + " / " +game.heros.getMax_hp() + " HP",skin);
-        tableStat.add(hp).width(100).height(100);
-        tableStat.row();
+        heart.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("img/heart.png"))));
+        heart.setScaling(Scaling.fit);
+        tableStat.add(heart);
+        hp =new Label(game.heros.getHp() + " / " +game.heros.getMax_hp(),skin);
+        hp.setFontScale(1.5f);
 
-        coord =new Label("Coord : X "+ game.heros.getCoord_x() + " Y " + game.heros.getCoord_y(),skin);
-        tableStat.add(coord).width(100).height(100).padTop(5);
+        tableStat.add(hp);//.width(hp.getWidth());
+        coord =new Label("Floor  "+ game.floor,skin);
+        tableStat.add(coord).padLeft(hp.getWidth());
+        hp.setFontScale(1.5f);
         tableStat.row();
 
 

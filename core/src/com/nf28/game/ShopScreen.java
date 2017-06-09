@@ -1,6 +1,7 @@
 package com.nf28.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,20 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +34,7 @@ public class ShopScreen implements Screen {
     Stage stage;
     int currentPage = 0;
     Image current;
+    Label gold ;
     List<String> listUrl = new ArrayList<String>();
     List<String> listPrice = new ArrayList<String>();
     List<String> listName = new ArrayList<String>();
@@ -53,6 +50,7 @@ public class ShopScreen implements Screen {
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
         skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+        //skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
         table = new Table();
         table.setFillParent(true);
         FileHandle file = Gdx.files.internal("character/character_list.json");
@@ -95,7 +93,9 @@ public class ShopScreen implements Screen {
         current.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
         table.add(current).colspan(2);;
         final TextButton retour =new TextButton("Retour",skin);
-        table.add(retour).expand().fill().colspan(2);;
+        gold= new Label(""+game.heros.getGold(),skin);
+        table.add(gold).expand().fill();
+        table.add(retour).expand().fill();
         table.row();
         retour.addListener(new ClickListener() {
             @Override
@@ -141,7 +141,7 @@ public class ShopScreen implements Screen {
                 break;
             imageList.get(i).setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/" + listUrl.get(page * 9 + i)))));
             String url=listUrl.get(page * 9 + i);
-            imageList.get(i).addListener(new buyListener(url,imageList.get(i)));
+            imageList.get(i).addListener(new buyListener(url,imageList.get(i),Integer.parseInt(listPrice.get(i))));
             nameLabelList.get(i).setText(listName.get(page * 9 + i));
             priceLabelList.get(i).setText(listPrice.get(page * 9 + i));
         }
@@ -186,16 +186,25 @@ public class ShopScreen implements Screen {
     class buyListener extends ClickListener{
         String url;
         Image image;
-        public buyListener(String url,Image image){
-            this.url=url;
+        int price;
+        public buyListener(String url,Image image,int price){
             this.url=url;
             this.image=image;
+            this.price=price;
 
         }
         @Override
         public void clicked(InputEvent event, float x, float y) {
-           game.heros.setImageUrl("character/"+this.url);
-            current.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
+            if(game.heros.getGold()>price) {
+                game.heros.setImageUrl("character/" + this.url);
+                game.heros.setGold(game.heros.getGold() - price);
+                Preferences prefs = Gdx.app.getPreferences("cfg");
+                prefs.putInteger("gold", game.heros.getGold());
+                prefs.putString("skin", game.heros.getImageUrl());
+                current.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
+                gold.setText(""+game.heros.getGold());
+                prefs.flush();
+            }
         }
     }
 }
