@@ -6,7 +6,6 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.nf28.model.Heros;
 import com.nf28.model.Map;
-import com.nf28.ressource.PropertiesUtil;
 
 
 public class VocabularyQuest extends Game {

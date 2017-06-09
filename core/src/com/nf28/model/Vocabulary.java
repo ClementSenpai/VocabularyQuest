@@ -3,9 +3,7 @@ package com.nf28.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Created by nicolas on 22/05/17.
@@ -14,7 +12,7 @@ public class Vocabulary extends HashMap<String,String> {
     List<String> keys ;
 
     public Vocabulary(){
-        this.put("test","test");
+        this.put("test","testé");
         this.put("test1","test1");
         this.put("test2","test2");
         this.put("test3","test3");

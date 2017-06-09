@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -29,9 +31,12 @@ import java.util.Map;
 public class BattleScreen implements Screen {
 
     Skin skin;
+    SpriteBatch batch;
+    Sprite background;
     VocabularyQuest game;
     Stage stage;
     Table table;
+    Table tableCheat;
     final TextButton map;
     Label badguyLifeLabel ;
     Label goodguyLifeLabel ;
@@ -50,10 +55,14 @@ public class BattleScreen implements Screen {
 
     public BattleScreen(final VocabularyQuest game){
         this.game = game;
+        batch = new SpriteBatch();
         monster = new Monster(game.floor);
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
-        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+//        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+        skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
+        background = new Sprite(new Texture("background/defaut.png"));
+        background.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         currentWord = vocab.getWord();
         currentWordLabel = new Label(currentWord,skin);
         desc = new Label("Attack",skin);
@@ -88,9 +97,14 @@ public class BattleScreen implements Screen {
         }
         table.add(answerTable).fill();
         table.row();
+
+        tableCheat= new Table();
+        tableCheat.setFillParent(true);
+        tableCheat.top().right();
         map =new TextButton("Map",skin);
-        table.add(map).colspan(2).expandX();
+        tableCheat.add(map).colspan(2).expandX();
         stage.addActor(table);
+        stage.addActor(tableCheat);
         refresh();
 
             map.addListener(new ClickListener() {
@@ -141,7 +155,7 @@ public class BattleScreen implements Screen {
         }
 
 
-        if(badguylife==0){
+        if(badguylife<=0){
             game.heros.setExp(game.heros.getExp() + monster.getExp());
             if(game.heros.getExp() >= HerosTemplate.palier_exp[game.heros.getLevel() ])
                 game.heros.levelUp();
@@ -149,7 +163,7 @@ public class BattleScreen implements Screen {
             game.setScreen(new MapScreen(game));
             game.dispose();
         }
-        if(game.heros.getHp()==0)
+        if(game.heros.getHp()<=0)
         {
             game.setScreen(new MainMenuScreen(game));
             game.dispose();
@@ -158,12 +172,12 @@ public class BattleScreen implements Screen {
     }
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1,1,1,1);
+        Gdx.gl.glClearColor(255,255,255,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-       /* if (map.isPressed()) {
-            game.setScreen(game.mapScreen);
-            dispose();
-        }*/
+        batch.begin();
+        background.draw(batch);
+        batch.end();
+
         stage.act(delta);
         stage.draw();
     }

@@ -5,6 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -23,26 +26,38 @@ public class MainMenuScreen implements Screen {
     Stage stage;
     VocabularyQuest game;
 
+    SpriteBatch batch;
+
+    Sprite main_screen = new Sprite(new Texture("img/ecrantitre.png"));
+
 
     public MainMenuScreen(final VocabularyQuest game){
+        final int WIDTH_BUTTON = Gdx.graphics.getWidth()*6/10;
+        final int HEIGHT_BUTTON = Gdx.graphics.getWidth()*15/100;
         this.game = game;
+        batch = new SpriteBatch();
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
-        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+//        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+
+        skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
+
+        main_screen.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         Table table=new Table();
-        table.setSize(800, 480);
+        table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        table.bottom();
 
         final TextButton startGame=new TextButton("Start game",skin);
-        table.add(startGame).width(400).height(100);
+        table.add(startGame).width(WIDTH_BUTTON).height(HEIGHT_BUTTON);
         table.row();
 
         TextButton options=new TextButton("Shop",skin);
-        table.add(options).width(400).height(100).padTop(10).padBottom(3);
+        table.add(options).width(WIDTH_BUTTON).height(HEIGHT_BUTTON).padTop(HEIGHT_BUTTON/10).padBottom(HEIGHT_BUTTON/10);
         table.row();
 
         TextButton credits=new TextButton("Import",skin); //Why credits ??
-        table.add(credits).width(400).height(100);
+        table.add(credits).width(WIDTH_BUTTON).height(HEIGHT_BUTTON);
         table.row();
 
 
@@ -109,6 +124,9 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClearColor(0,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        batch.begin();
+        main_screen.draw(batch);
+        batch.end();
         stage.act(delta);
         stage.draw();
         //stage.setViewport(800,480,false);
