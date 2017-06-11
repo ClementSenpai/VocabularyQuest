@@ -22,10 +22,7 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
-
-import javax.swing.GroupLayout;
 
 /**
  * Created by Clément on 11/05/2017.
@@ -99,7 +96,7 @@ public class ShopScreen implements Screen {
         Table backtable = new Table();
 
         final TextButton retour =new TextButton("Retour",skin);
-        gold= new Label(""+game.heros.getGold(),skin);
+        gold= new Label(""+game.getOr(),skin);
         backtable.add(gold).expand().fill();
         Image goldimg = new Image();
         backtable.add(goldimg);
@@ -211,10 +208,10 @@ public class ShopScreen implements Screen {
                 game.heros.setImageUrl("character/" + this.url);
                 game.heros.setGold(game.heros.getGold() - price);
                 Preferences prefs = Gdx.app.getPreferences("cfg");
-                prefs.putInteger("gold", game.heros.getGold());
+                prefs.putInteger("gold", game.getOr());
                 prefs.putString("skin", game.heros.getImageUrl());
                 current.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
-                gold.setText(""+game.heros.getGold());
+                gold.setText(""+game.getOr());
                 prefs.flush();
             }
         }

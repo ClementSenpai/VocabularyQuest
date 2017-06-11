@@ -2,6 +2,7 @@ package com.nf28.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -39,6 +40,8 @@ public class BattleScreen implements Screen {
     Table table;
     Table tableCheat;
     final TextButton map;
+    final TextButton objet;
+    final TextButton magie;
     Label badguyLifeLabel ;
     Label goodguyLifeLabel ;
     Label desc ;
@@ -106,9 +109,20 @@ public class BattleScreen implements Screen {
 
         tableCheat= new Table();
         tableCheat.setFillParent(true);
-        tableCheat.top().right();
-        map =new TextButton("Map",skin);
-        tableCheat.add(map).colspan(2).expandX();
+        tableCheat.bottom();
+        map =new TextButton("Flee",skin);
+        map.setWidth(Gdx.graphics.getWidth());
+       // table.add(map).colspan(2).expandX();
+        tableCheat.add(map).expandX();
+        tableCheat.row();
+        objet=new TextButton("Item",skin);
+        objet.setWidth(Gdx.graphics.getWidth());
+        tableCheat.add(objet);
+        tableCheat.row();
+        magie=new TextButton("Skill",skin);
+        magie.setWidth(Gdx.graphics.getWidth());
+        tableCheat.add(magie);
+        table.add(tableCheat).fill();
         stage.addActor(table);
         stage.addActor(tableCheat);
         refresh();
@@ -183,6 +197,10 @@ public class BattleScreen implements Screen {
             if(game.heros.getExp() >= HerosTemplate.palier_exp[game.heros.getLevel() ])
                 game.heros.levelUp();
             game.setOr(game.getOr() + monster.getOr() );
+
+            Preferences prefs = Gdx.app.getPreferences("cfg");
+            prefs.putInteger("gold", game.getOr());
+            prefs.flush();
             game.setScreen(new MapScreen(game));
             game.dispose();
         }

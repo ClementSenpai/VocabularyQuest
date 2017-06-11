@@ -23,7 +23,7 @@ public class VocabularyQuest extends Game {
         Preferences prefs = Gdx.app.getPreferences("cfg");
         heros = new Heros();
         heros.setImageUrl(prefs.getString("skin","character/character.png"));
-        heros.setGold(prefs.getInteger("gold",0));
+        or = prefs.getInteger("gold",0);
         map = new Map(floor);
         mainMenuScreen = new MainMenuScreen(this);
         setScreen(mainMenuScreen);

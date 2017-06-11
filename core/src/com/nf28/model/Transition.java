@@ -1,5 +1,6 @@
 package com.nf28.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -27,7 +28,7 @@ public class Transition {
     public Transition(){
         i = 0;
         j = 255;
-
+        black_fadeout.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         black_fadeout.setX(0);
         black_fadeout.setY(0);
     }
