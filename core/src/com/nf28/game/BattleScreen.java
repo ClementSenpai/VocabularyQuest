@@ -40,8 +40,8 @@ public class BattleScreen implements Screen {
     Table table;
     Table tableCheat;
     final TextButton map;
-    final TextButton objet;
-    final TextButton magie;
+    //final TextButton objet;
+    //final TextButton magie;
     Label badguyLifeLabel ;
     Label goodguyLifeLabel ;
     Label desc ;
@@ -104,27 +104,31 @@ public class BattleScreen implements Screen {
             answerTable.row();
             tb.addListener(al);
         }
+
         table.add(answerTable).fill();
         table.row();
-
-        tableCheat= new Table();
-        tableCheat.setFillParent(true);
-        tableCheat.bottom();
         map =new TextButton("Flee",skin);
-        map.setWidth(Gdx.graphics.getWidth());
+        table.add(map).colspan(2).expandX();
+//        table.row();
+
+        //tableCheat= new Table();
+        //tableCheat.setFillParent(true);
+        //tableCheat.bottom();
+       // map =new TextButton("Flee",skin);
+       // map.setWidth(Gdx.graphics.getWidth());
        // table.add(map).colspan(2).expandX();
-        tableCheat.add(map).expandX();
-        tableCheat.row();
-        objet=new TextButton("Item",skin);
-        objet.setWidth(Gdx.graphics.getWidth());
-        tableCheat.add(objet);
-        tableCheat.row();
-        magie=new TextButton("Skill",skin);
-        magie.setWidth(Gdx.graphics.getWidth());
-        tableCheat.add(magie);
-        table.add(tableCheat).fill();
+        //tableCheat.add(map).expandX();
+        //tableCheat.row();
+        //objet=new TextButton("Item",skin);
+        //objet.setWidth(Gdx.graphics.getWidth());
+        //tableCheat.add(objet);
+        //tableCheat.row();
+        //magie=new TextButton("Skill",skin);
+        //magie.setWidth(Gdx.graphics.getWidth());
+       // tableCheat.add(magie);
+        //table.add(tableCheat).fill();
         stage.addActor(table);
-        stage.addActor(tableCheat);
+        //stage.addActor(tableCheat);
         refresh();
 
             map.addListener(new ClickListener() {
@@ -204,8 +208,7 @@ public class BattleScreen implements Screen {
         }
         if(game.heros.getHp()<=0)
         {
-            game.resetGame();
-            game.setScreen(new MainMenuScreen(game));
+            game.setScreen(new GameOverScreen(game));
             game.dispose();
         }
 

@@ -6,6 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -30,6 +32,7 @@ import java.util.List;
 public class ShopScreen implements Screen {
 
     Skin skin;
+    SpriteBatch batch;
     VocabularyQuest game;
     Stage stage;
     int currentPage = 0;
@@ -40,12 +43,16 @@ public class ShopScreen implements Screen {
     List<Label> priceLabelList = new ArrayList<Label>();
     List<Image> imageList = new ArrayList<Image>();
 
+    Sprite background = new Sprite(new Texture("background/background_shop.png"));
+
 
     Table table;
 
     public ShopScreen(final VocabularyQuest game){
         this.game = game;
         stage=new Stage();
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch = new SpriteBatch();
         Gdx.input.setInputProcessor(stage);
         skin = new Skin( Gdx.files.internal("ui/defaultskin.json"));
         //skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
@@ -164,6 +171,9 @@ public class ShopScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        background.draw(batch);
+        batch.end();
         stage.act(delta);
         stage.draw();
     }

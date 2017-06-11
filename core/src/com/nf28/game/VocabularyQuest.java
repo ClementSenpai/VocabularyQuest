@@ -16,6 +16,7 @@ public class VocabularyQuest extends Game {
     Heros heros;
     Map map;
     int floor=0;
+    int bestfloor;
     int or;
 
     @Override
@@ -24,6 +25,7 @@ public class VocabularyQuest extends Game {
         heros = new Heros();
         heros.setImageUrl(prefs.getString("skin","character/character.png"));
         or = prefs.getInteger("gold",0);
+        bestfloor = prefs.getInteger("bestfloor",0);
         map = new Map(floor);
         mainMenuScreen = new MainMenuScreen(this);
         setScreen(mainMenuScreen);

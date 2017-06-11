@@ -32,8 +32,10 @@ public class MainMenuScreen implements Screen {
 
     Skin skin;
     Skin basicSkin;
+    Skin selectSkin;
     Stage stage;
     VocabularyQuest game;
+    Label bestfloor;
 
     SpriteBatch batch;
 
@@ -50,19 +52,25 @@ public class MainMenuScreen implements Screen {
 //        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
 
         skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
+        //selectSkin = new Skin( Gdx.files.internal( "skin/extras/skin/extras-ui.json" ));
         basicSkin  = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
         main_screen.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-
+        bestfloor = new Label("Best floor : " + game.bestfloor ,skin);
 
         Table table=new Table();
         table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.bottom();
 
+
+        table.add(bestfloor).padBottom(Gdx.graphics.getHeight()/10);
+        table.row();
+
         final SelectBox<String> listVoc = new SelectBox<String>(basicSkin);
         Array<String> lists = FileLoader.loadFilesNames();
         listVoc.setItems(lists);
-        table.add(listVoc).width(200).height(100).left().top();
+
+        table.add(listVoc).width(Gdx.graphics.getWidth()/2).height(Gdx.graphics.getHeight()/15).top();
         table.row();
 
         final TextButton startGame=new TextButton("Start game",skin);
@@ -123,7 +131,6 @@ public class MainMenuScreen implements Screen {
                 files.setDirectory(new FileHandle(Gdx.files.getExternalStoragePath()));
                 files.getBackground().setMinHeight(Gdx.graphics.getHeight()/3);  //TODO Scale with phone resolution
                 files.getBackground().setMinWidth(Gdx.graphics.getWidth());
-                //files.setFillParent(true);
                 files.show(stage);
             }
         });

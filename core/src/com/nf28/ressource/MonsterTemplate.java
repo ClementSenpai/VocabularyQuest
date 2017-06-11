@@ -86,7 +86,7 @@ public class MonsterTemplate {
     };
 
     public static int or[] = {
-            1,
+            100,
             2,
             3,
             4,
