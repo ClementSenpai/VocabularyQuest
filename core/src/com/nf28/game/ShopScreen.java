@@ -22,7 +22,10 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
+
+import javax.swing.GroupLayout;
 
 /**
  * Created by Clément on 11/05/2017.
@@ -37,8 +40,6 @@ public class ShopScreen implements Screen {
     Label gold ;
     List<String> listUrl = new ArrayList<String>();
     List<String> listPrice = new ArrayList<String>();
-    List<String> listName = new ArrayList<String>();
-    List<Label> nameLabelList = new ArrayList<Label>();
     List<Label> priceLabelList = new ArrayList<Label>();
     List<Image> imageList = new ArrayList<Image>();
 
@@ -49,7 +50,7 @@ public class ShopScreen implements Screen {
         this.game = game;
         stage=new Stage();
         Gdx.input.setInputProcessor(stage);
-        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
+        skin = new Skin( Gdx.files.internal("ui/defaultskin.json"));
         //skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
         table = new Table();
         table.setFillParent(true);
@@ -57,29 +58,31 @@ public class ShopScreen implements Screen {
         String text = file.readString();
         JsonValue json = new JsonReader().parse(text);
         JsonValue jsonobj = json.get("character");
-        int cpt=1;
         for (JsonValue o : jsonobj.iterator()) {
             listUrl.add(o.getString("url"));
             listPrice.add("" + o.getInt("price"));
-            listName.add(o.getString("name"));
         }
         for(int i=0;i<3;i++) {
             for(int j=0;j<3;j++) {
                 Image image = new Image();
-                //test.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/" + o.getString("url")))));
                 image.setScaling(Scaling.fit);
+                image.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("tiles/white.png"))));
                 table.add(image).fill().expand().colspan(2);
                 imageList.add(image);
             }
             table.row();
             for(int j=0;j<3;j++) {
-                Label nameLabel = new Label("name",skin);
-                table.add(nameLabel).fillX().expandX();
-                nameLabelList.add(nameLabel);
                 Label priceLabel = new Label("name",skin);
-                //test.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/" + o.getString("url")))));
-                table.add(priceLabel).fillX().expandX();
+                if(i!=0){
+                    table.add(priceLabel).width(priceLabelList.get(0).getWidth());
+                }else{
+                    table.add(priceLabel).expand();
+                }
                 priceLabelList.add(priceLabel);
+                Image goldimg = new Image();
+                table.add(goldimg).height(20).width(20);
+                goldimg.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("img/gold.png"))));
+
             }
             table.row();
         }
@@ -92,11 +95,20 @@ public class ShopScreen implements Screen {
         current = new Image();
         current.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(game.heros.getImageUrl()))));
         table.add(current).colspan(2);;
+
+        Table backtable = new Table();
+
         final TextButton retour =new TextButton("Retour",skin);
         gold= new Label(""+game.heros.getGold(),skin);
-        table.add(gold).expand().fill();
-        table.add(retour).expand().fill();
-        table.row();
+        backtable.add(gold).expand().fill();
+        Image goldimg = new Image();
+        backtable.add(goldimg);
+        goldimg.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("img/gold.png"))));
+
+        backtable.row();
+        backtable.add(retour).expand().fill().colspan(2);
+        backtable.row();
+        table.add(backtable).colspan(2).expand().fill();
         retour.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -130,10 +142,11 @@ public class ShopScreen implements Screen {
 
     }
     public void refresh(int page){
-        for(Image i : imageList)
-            i.setDrawable(null);
-        for(Label l:nameLabelList)
-            l.setText("");
+        for(Image i : imageList) {
+            i.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/alpha.png"))));
+            for(com.badlogic.gdx.scenes.scene2d.EventListener e : i.getListeners())
+                i.removeListener(e);
+        }
         for(Label l:priceLabelList)
             l.setText("");
         for(int i=0;i<9;i++){
@@ -141,8 +154,7 @@ public class ShopScreen implements Screen {
                 break;
             imageList.get(i).setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/" + listUrl.get(page * 9 + i)))));
             String url=listUrl.get(page * 9 + i);
-            imageList.get(i).addListener(new buyListener(url,imageList.get(i),Integer.parseInt(listPrice.get(i))));
-            nameLabelList.get(i).setText(listName.get(page * 9 + i));
+            imageList.get(i).addListener(new buyListener(url, imageList.get(i), Integer.parseInt(listPrice.get(page * 9 + i))));
             priceLabelList.get(i).setText(listPrice.get(page * 9 + i));
         }
     }

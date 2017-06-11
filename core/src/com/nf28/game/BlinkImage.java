@@ -1,11 +1,8 @@
 package com.nf28.game;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
  * Created by nicolas on 08/06/17.
@@ -44,7 +41,7 @@ public class BlinkImage extends Image {
 
     public void draw (Batch batch, float parentAlpha) {
         if(!getBlink())
-            super.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("tiles/white.png"))));
+            super.setDrawable(null);
         else
             super.setDrawable(drawable);
         super.draw(batch, parentAlpha);

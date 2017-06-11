@@ -5,46 +5,42 @@
 	},{
 	"name":"2",
 	"url":"character2.png",
-	"price":10,
+	"price":20,
 	},{
 	"name":"3",
 	"url":"character3.png",
-	"price":10,
+	"price":50,
 	},{
 	"name":"4",
 	"url":"character4.png",
-	"price":10,
+	"price":100,
 	},{
 	"name":"5",
 	"url":"character5.png",
-	"price":10,
+	"price":200,
 	},{
 	"name":"6",
-	"url":"character.png",
-	"price":10,
+	"url":"character6.png",
+	"price":500,
 	},{
 	"name":"7",
-	"url":"character.png",
-	"price":10,
+	"url":"character7.png",
+	"price":1000,
 	},{
 	"name":"8",
-	"url":"character.png",
-	"price":10,
+	"url":"character8.png",
+	"price":2000,
 	},{
 	"name":"9",
-	"url":"character.png",
-	"price":10,
+	"url":"character9.png",
+	"price":5000,
 	},{
 	"name":"10",
-	"url":"character.png",
-	"price":10,
+	"url":"character10.png",
+	"price":10000,
 	},{
 	"name":"11",
-	"url":"character.png",
-	"price":10,
-	},{
-	"name":"12",
-	"url":"character.png",
-	"price":10,
+	"url":"character11.png",
+	"price":100000,
 	},
 	]}
