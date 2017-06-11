@@ -44,7 +44,7 @@ public class BlinkImage extends Image {
 
     public void draw (Batch batch, float parentAlpha) {
         if(!getBlink())
-            super.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("tiles/white.png"))));
+            super.setDrawable(null);
         else
             super.setDrawable(drawable);
         super.draw(batch, parentAlpha);
