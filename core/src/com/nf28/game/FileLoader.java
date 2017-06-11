@@ -3,6 +3,7 @@ package com.nf28.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.nf28.model.Vocabulary;
 
@@ -45,18 +46,18 @@ public class FileLoader {
         BufferedReader reader = new BufferedReader(file.reader());
         Array<String> lines = new Array<String>();
         String line = null;
-        //Pattern p = Pattern.compile("(.*),(.*)");
-        Pattern p = Pattern.compile("\"([-'\\(\\)\\s\\p{Ll}]+)\",\"([-'\\(\\)\\s\\p{Ll}]+)\"");
+        Pattern p = Pattern.compile("\"([-'\\(\\)\\s\\d\\p{Ll}\\p{Lu}\\p{Punct}\\+\\=\\\\]+)\",\"([-'\\(\\)\\s\\d\\p{Ll}\\p{Lu}\\p{Punct}\\+\\=\\\\]+)\"");
         try {
             line = removeAccents(reader.readLine());
             while( line != null ) {
                 Matcher m = p.matcher(line);
-                while (m.find()){
+                if (m.matches()){
                     if(m.group().length() != 0){
+                        //Gdx.app.log("FileLoader", " Found : " + m.group(1) + " --- " + m.group(2));
                         listVocabulary.put(m.group(1), m.group(2));
-                        Gdx.app.log(" FileLoader ", "Found :" + m.group(1) + m.group(2));
                     }
                 }
+                else  Gdx.app.log("FileLoader", "Debug Line : " + line );
                 lines.add(line);
                 line = removeAccents(reader.readLine());
             }
@@ -71,18 +72,26 @@ public class FileLoader {
         return (Gdx.files.local(file.name()).exists());
     }
 
-    public static boolean checkFile (FileHandle file) {
+    public static String checkFile (FileHandle file) {
         BufferedReader reader = new BufferedReader(file.reader());
         Array<String> lines = new Array<String>();
         String line = null;
-        Pattern p = Pattern.compile("\"([-'\\(\\)\\s\\p{Ll}]+)\",\"([-'\\(\\)\\s\\p{Ll}]+)\"");
-        while( line != null ) {
-            Matcher m = p.matcher(line);
-            if (m.find() == false){
-                return false;
+        Pattern p = Pattern.compile("\"([-'\\(\\)\\s\\d\\p{Ll}\\p{Lu}\\p{Punct}\\+\\=\\\\]+)\",\"([-'\\(\\)\\s\\d\\p{Ll}\\p{Lu}\\p{Punct}\\+\\=\\\\]+)\"");
+        try {
+            line = removeAccents(reader.readLine());
+            while( line != null ) {
+                Matcher m = p.matcher(line);
+                if (m.matches() == false) {
+                    Gdx.app.log("FileLoader", "Debug Line : " + line );
+                    return line;
+                }
+                lines.add(line);
+                line = removeAccents(reader.readLine());
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return true;
+        return "OK";
     }
 
     public static FileHandle loadDefaultFile() {

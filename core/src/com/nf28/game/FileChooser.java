@@ -102,8 +102,9 @@ public class FileChooser extends Dialog {
                     if (handle.isDirectory()) {
                         setDirectory(handle);
                     } else {
-                        if (!FileLoader.checkFile(handle)){
-                            ErrorDialog errorDialog = new ErrorDialog("Error", skin, new Label("File could not be read, please see if it is a Comma-separated values file", skin));
+                        if (FileLoader.checkFile(handle) != "OK"){
+                            ErrorDialog errorDialog = new ErrorDialog("Error", skin, new Label(
+                                    "File could not be read, please see if it is a Comma-separated values file. Problem at line : \n" + FileLoader.checkFile(handle) , skin));
                             errorDialog.showMessage();
                             errorDialog.getBackground().setMinWidth(150);
                             errorDialog.getBackground().setMinHeight(100);
@@ -118,7 +119,6 @@ public class FileChooser extends Dialog {
                             errorDialog.show(getStage());
                         }
                         else {
-                            Gdx.app.log("FileChooser", " Check Success ");
                             setFile(handle);
                         }
                     }
@@ -136,13 +136,6 @@ public class FileChooser extends Dialog {
         label.addListener(fileClickListener);
         table.add(label).expandX().fillX();
         for (FileHandle file : files) {
-            Gdx.app.setLogLevel(Application.LOG_DEBUG);
-            if (file.exists()) {
-                Gdx.app.log(" File Name : ", file.path());
-            }
-            else {
-                Gdx.app.log(" File Name : ", " Null ");
-            }
             table.row();
             label = new Label(file.name(), skin);
             label.setName(file.name());

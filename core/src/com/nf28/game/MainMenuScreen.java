@@ -164,7 +164,7 @@ public class MainMenuScreen implements Screen {
                    }
                };
                fileOptions.showFileName();
-               fileOptions.getBackground().setMinWidth(Gdx.graphics.getWidth()/3);
+               fileOptions.getBackground().setMinWidth(Gdx.graphics.getWidth()/4);
                fileOptions.getBackground().setMinHeight(Gdx.graphics.getHeight()/8);
                fileOptions.show(stage);
            }
