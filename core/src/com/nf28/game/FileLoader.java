@@ -22,7 +22,7 @@ public class FileLoader {
 
     public static FileHandle[] loadFiles(){
         FileSaver.saveFile(Gdx.files.internal("lists/Default.csv"));
-        FileHandle local_dir = new FileHandle(Gdx.files.getLocalStoragePath());
+        FileHandle local_dir = Gdx.files.local("importedLists");
         return local_dir.list();
     }
 
@@ -57,7 +57,7 @@ public class FileLoader {
                         listVocabulary.put(m.group(1), m.group(2));
                     }
                 }
-                else  Gdx.app.log("FileLoader", "Debug Line : " + line );
+                //else  Gdx.app.log("FileLoader", "Debug Line : " + line );
                 lines.add(line);
                 line = removeAccents(reader.readLine());
             }
@@ -69,7 +69,7 @@ public class FileLoader {
     }
 
     public static boolean checkExistence (FileHandle file) {
-        return (Gdx.files.local(file.name()).exists());
+        return (Gdx.files.local("importedLists/" + file.name()).exists());
     }
 
     public static String checkFile (FileHandle file) {
@@ -82,7 +82,7 @@ public class FileLoader {
             while( line != null ) {
                 Matcher m = p.matcher(line);
                 if (m.matches() == false) {
-                    Gdx.app.log("FileLoader", "Debug Line : " + line );
+                    //Gdx.app.log("FileLoader", "Debug Line : " + line );
                     return line;
                 }
                 lines.add(line);
@@ -97,11 +97,11 @@ public class FileLoader {
     public static FileHandle loadDefaultFile() {
         Preferences preferences = Gdx.app.getPreferences("ca.nf28.vocabularyquest.settings");
         String default_file_name = preferences.getString("DEFAULT_LIST", "Default.csv");
-        FileHandle default_file = Gdx.files.local(default_file_name);
+        FileHandle default_file = Gdx.files.local("importedLists/").child(default_file_name);
         if (default_file.exists()){
             return default_file;
         }
-        return Gdx.files.local("Default.csv");
+        return Gdx.files.local("importedLists/Default.csv");
     }
 
     public static Vocabulary loadDefaultList() throws IOException {
