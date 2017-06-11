@@ -154,13 +154,30 @@ public class BattleScreen implements Screen {
             desc.setText("Attack");
         else
             desc.setText("Defense");
-        currentWordLabel.setText(currentWord);
+        currentWordLabel.setText("  " + currentWord);
+        currentWordLabel.setWrap(true);
+        /*
+        if (currentWordLabel.getText().length() > 30)
+            currentWordLabel.setFontScale(0.3f);
+        else if (currentWordLabel.getText().length() > 20)
+            currentWordLabel.setFontScale(0.5f);
+        else
+            currentWordLabel.setFontScale(1f);
+        */
         badguyLifeLabel.setText(badguylife+"/"+badguyMaxHP);
         goodguyLifeLabel.setText(game.heros.getHp()+"/"+game.heros.getMax_hp());
         String[] answers = vocab.getResponse(currentWord,4);
         int cpt=0;
         for(Map.Entry<TextButton,AnswerListener> e : answer_list.entrySet()){
+
             e.getKey().setText(answers[cpt]);
+           /* if (e.getKey().getLabel().getText().length() > 30)
+                e.getKey().getLabel().setFontScale(0.3f);
+            else if (e.getKey().getLabel().getText().length() > 20)
+                 e.getKey().getLabel().setFontScale(0.5f);
+            else
+                e.getKey().getLabel().setFontScale(1f);*/
+            e.getKey().getLabel().setWrap(true);
             e.getValue().answer = answers[cpt++];
         }
 

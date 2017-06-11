@@ -5,16 +5,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -32,6 +31,7 @@ import java.io.IOException;
 public class MainMenuScreen implements Screen {
 
     Skin skin;
+    Skin basicSkin;
     Stage stage;
     VocabularyQuest game;
 
@@ -50,7 +50,7 @@ public class MainMenuScreen implements Screen {
 //        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
 
         skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
-
+        basicSkin  = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
         main_screen.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 
@@ -59,7 +59,7 @@ public class MainMenuScreen implements Screen {
         table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.bottom();
 
-        final SelectBox<String> listVoc = new SelectBox<String>(new Skin( Gdx.files.internal( "ui/defaultskin.json" )));
+        final SelectBox<String> listVoc = new SelectBox<String>(basicSkin);
         Array<String> lists = FileLoader.loadFilesNames();
         listVoc.setItems(lists);
         table.add(listVoc).width(200).height(100).left().top();
@@ -122,8 +122,9 @@ public class MainMenuScreen implements Screen {
                 // If emulator use Local StoragePath
                 //files.setDirectory(new FileHandle(Gdx.files.getLocalStoragePath()));
                 files.setDirectory(new FileHandle(Gdx.files.getExternalStoragePath()));
-                files.getBackground().setMinHeight(640);  //TODO Scale with phone resolution
-                files.getBackground().setMinWidth(480);
+                files.getBackground().setMinHeight(Gdx.graphics.getHeight()/3);  //TODO Scale with phone resolution
+                files.getBackground().setMinWidth(Gdx.graphics.getWidth());
+                //files.setFillParent(true);
                 files.show(stage);
             }
         });
@@ -155,6 +156,7 @@ public class MainMenuScreen implements Screen {
 
                    }
                };
+
                fileOptions.getBackground().setMinWidth(320);
                fileOptions.getBackground().setMinHeight(240);
                fileOptions.show(stage);

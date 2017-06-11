@@ -28,8 +28,11 @@ public class FileHandleView extends Dialog {
         this.getButtonTable().defaults().expandX().fill();
 
         this.button("Cancel", "Cancel");
+        this.getButtonTable().row();
         this.button("Load", "Load");
+        this.getButtonTable().row();
         this.button("Rename", "Rename");
+        this.getButtonTable().row();
         this.button("Remove", "Remove");
 
         this.setModal(true);
