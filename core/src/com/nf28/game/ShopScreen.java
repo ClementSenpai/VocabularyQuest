@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.Scaling;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -61,11 +62,11 @@ public class ShopScreen implements Screen {
             listUrl.add(o.getString("url"));
             listPrice.add("" + o.getInt("price"));
         }
-        table.setDebug(true);
         for(int i=0;i<3;i++) {
             for(int j=0;j<3;j++) {
                 Image image = new Image();
                 image.setScaling(Scaling.fit);
+                image.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("tiles/white.png"))));
                 table.add(image).fill().expand().colspan(2);
                 imageList.add(image);
             }
@@ -141,8 +142,12 @@ public class ShopScreen implements Screen {
 
     }
     public void refresh(int page){
-        for(Image i : imageList)
-            i.setDrawable(null);
+        game.heros.setGold(1000);
+        for(Image i : imageList) {
+            i.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/alpha.png"))));
+            for(com.badlogic.gdx.scenes.scene2d.EventListener e : i.getListeners())
+                i.removeListener(e);
+        }
         for(Label l:priceLabelList)
             l.setText("");
         for(int i=0;i<9;i++){
@@ -150,7 +155,7 @@ public class ShopScreen implements Screen {
                 break;
             imageList.get(i).setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/" + listUrl.get(page * 9 + i)))));
             String url=listUrl.get(page * 9 + i);
-            imageList.get(i).addListener(new buyListener(url, imageList.get(i), Integer.parseInt(listPrice.get(i))));
+            imageList.get(i).addListener(new buyListener(url, imageList.get(i), Integer.parseInt(listPrice.get(page * 9 + i))));
             priceLabelList.get(i).setText(listPrice.get(page * 9 + i));
         }
     }
