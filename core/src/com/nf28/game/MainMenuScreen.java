@@ -114,7 +114,6 @@ public class MainMenuScreen implements Screen {
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                Gdx.app.log(" FileChooser ", "You have chosen this file : " + file.name());
                             }
                         }
                     }
@@ -131,14 +130,14 @@ public class MainMenuScreen implements Screen {
         listVoc.addListener(new ChangeListener() {
            @Override
            public void changed(ChangeEvent event, Actor actor) {
-               FileHandleView fileOptions = new FileHandleView("Select an action", skin, Gdx.files.local(listVoc.getSelected())){
+               final FileHandleView fileOptions = new FileHandleView("Select an action", skin, listVoc.getSelected()){
                    @Override
-                   protected void result(Object object){
+                   protected void result(final Object object){
                        if (object.equals("Load")){
                            FileSaver.saveDefaultFile(listVoc.getSelected());
                        }
                        else if (object.equals("Remove")){
-                           ErrorDialog errorDialog = new ErrorDialog("Error", skin, new Label("Do you really want to remove " + listVoc.getSelected(), skin)) {
+                           ErrorDialog errorDialog = new ErrorDialog("Warning", skin, new Label("Do you really want to remove " + listVoc.getSelected(), skin)) {
                                @Override
                                protected void result(Object object) {
                                    if (object.equals("OK")){
@@ -149,14 +148,23 @@ public class MainMenuScreen implements Screen {
                            };
                            errorDialog.showMessage();
                            errorDialog.getBackground().setMinWidth(150);
-                           errorDialog.getBackground().setMinHeight(100);
+                           errorDialog.getBackground().setMinHeight(240);
                            errorDialog.show(getStage());
+                       }
+                       else if (object.equals("Rename")){
+                           final RenameDialog renameDialog = new RenameDialog("Rename your file", skin, listVoc.getSelected());
+                           renameDialog.showTextField();
+                           renameDialog.getBackground().setMinWidth(240);
+                           renameDialog.getBackground().setMinHeight(150);
+                           renameDialog.show(stage);
+                           listVoc.setItems(FileLoader.loadFilesNames());
                        }
 
                    }
                };
-               fileOptions.getBackground().setMinWidth(320);
-               fileOptions.getBackground().setMinHeight(240);
+               fileOptions.showFileName();
+               fileOptions.getBackground().setMinWidth(Gdx.graphics.getWidth()/3);
+               fileOptions.getBackground().setMinHeight(Gdx.graphics.getHeight()/8);
                fileOptions.show(stage);
            }
         });

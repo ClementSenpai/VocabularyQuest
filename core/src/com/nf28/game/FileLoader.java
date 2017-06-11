@@ -3,12 +3,12 @@ package com.nf28.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.utils.Array;
 import com.nf28.model.Vocabulary;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,18 +34,21 @@ public class FileLoader {
         return files_names;
     }
 
+    public static String removeAccents(String text) {
+        return text == null ? null
+                : Normalizer.normalize(text, Normalizer.Form.NFD)
+                .replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+    }
+
     public static Vocabulary parseFile (FileHandle file) throws IOException {
         Vocabulary listVocabulary = new Vocabulary();
         BufferedReader reader = new BufferedReader(file.reader());
         Array<String> lines = new Array<String>();
         String line = null;
-        Pattern p = Pattern.compile("(.*);(.*)");
+        //Pattern p = Pattern.compile("(.*),(.*)");
+        Pattern p = Pattern.compile("\"([-'\\(\\)\\s\\p{Ll}]+)\",\"([-'\\(\\)\\s\\p{Ll}]+)\"");
         try {
-            line = reader.readLine();
-            if (line == null){
-                Gdx.app.log(" FileLoader ", "Empty File");
-            }
-            line = "the labour force;la main d'oeuvre";
+            line = removeAccents(reader.readLine());
             while( line != null ) {
                 Matcher m = p.matcher(line);
                 while (m.find()){
@@ -55,7 +58,7 @@ public class FileLoader {
                     }
                 }
                 lines.add(line);
-                line = reader.readLine();
+                line = removeAccents(reader.readLine());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,11 +67,15 @@ public class FileLoader {
         return listVocabulary;
     }
 
+    public static boolean checkExistence (FileHandle file) {
+        return (Gdx.files.local(file.name()).exists());
+    }
+
     public static boolean checkFile (FileHandle file) {
         BufferedReader reader = new BufferedReader(file.reader());
         Array<String> lines = new Array<String>();
         String line = null;
-        Pattern p = Pattern.compile("^([a-zA-Z0-9]*);([a-zA-Z0-9]*)$");
+        Pattern p = Pattern.compile("\"([-'\\(\\)\\s\\p{Ll}]+)\",\"([-'\\(\\)\\s\\p{Ll}]+)\"");
         while( line != null ) {
             Matcher m = p.matcher(line);
             if (m.find() == false){
@@ -82,7 +89,6 @@ public class FileLoader {
         Preferences preferences = Gdx.app.getPreferences("ca.nf28.vocabularyquest.settings");
         String default_file_name = preferences.getString("DEFAULT_LIST", "Default.csv");
         FileHandle default_file = Gdx.files.local(default_file_name);
-        Gdx.app.log(" FileLoader ", " File Default in settings " + default_file_name);
         if (default_file.exists()){
             return default_file;
         }

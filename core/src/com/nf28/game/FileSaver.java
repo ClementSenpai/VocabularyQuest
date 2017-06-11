@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
 
+import java.io.File;
+
 /**
  * Created by Rachid Khalef on 08/06/2017.
  */
@@ -14,9 +16,6 @@ public class FileSaver {
         FileHandle localSave = Gdx.files.local(saveFile.name());
         if(!localSave.exists()){
             saveFile.copyTo(new FileHandle(Gdx.files.getLocalStoragePath()));
-        }
-        else{
-            Gdx.app.log(" FileSaver ", localSave.name() + " already exists ");
         }
     }
 
@@ -29,8 +28,13 @@ public class FileSaver {
     public static void removeFile(String file_name) {
         FileHandle file_to_remove = Gdx.files.local(file_name);
         if (file_to_remove.exists()) {
-            Gdx.app.log("FileSaver", " It does exist ");
             file_to_remove.delete();
         }
+    }
+
+    public static  void renameFile(String file_name, String new_file_name) {
+        FileHandle file_to_rename = Gdx.files.local(file_name);
+        if (file_to_rename.exists() && file_name != new_file_name)
+            file_to_rename.file().renameTo(new File(file_to_rename.file().getParentFile(), new_file_name));
     }
 }

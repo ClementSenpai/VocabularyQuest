@@ -103,16 +103,19 @@ public class FileChooser extends Dialog {
                         setDirectory(handle);
                     } else {
                         if (!FileLoader.checkFile(handle)){
-                            /*Gdx.app.log("FileChooser", " Check Failed ");
-                            table.row();
-                            Label error_message = new Label("A Problem has occurred : Please check your file", skin);
-                            table.add(error_message);*/
-                            ErrorDialog errorDialog = new ErrorDialog("Error", skin, new Label("File could not be read, please see if it is a semicolon separated file", skin));
+                            ErrorDialog errorDialog = new ErrorDialog("Error", skin, new Label("File could not be read, please see if it is a Comma-separated values file", skin));
                             errorDialog.showMessage();
                             errorDialog.getBackground().setMinWidth(150);
                             errorDialog.getBackground().setMinHeight(100);
                             errorDialog.show(getStage());
 
+                        }
+                        else if(FileLoader.checkExistence(handle)){
+                            ErrorDialog errorDialog = new ErrorDialog("Error", skin, new Label("File with the same name already exists, please rename it or remove before import", skin));
+                            errorDialog.showMessage();
+                            errorDialog.getBackground().setMinWidth(150);
+                            errorDialog.getBackground().setMinHeight(100);
+                            errorDialog.show(getStage());
                         }
                         else {
                             Gdx.app.log("FileChooser", " Check Success ");

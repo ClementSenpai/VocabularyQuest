@@ -4,16 +4,16 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 /**
- * Created by Kovalsky2099 on 09/06/2017.
+ * Created by Eachid Khalef on 09/06/2017.
  */
 
 public class FileHandleView extends Dialog {
     private Skin skin;
     private TextField fileNameField;
-    private FileHandle choosenFile;
 
     public String getfileNameField(){ return fileNameField.getText();}
 
@@ -22,7 +22,7 @@ public class FileHandleView extends Dialog {
         return super.show(stage);
     }
 
-    public FileHandleView(String title, Skin skin, FileHandle file){
+    public FileHandleView(String title, Skin skin, String file_name){
         super(title, skin);
         this.getCell(getButtonTable()).expandX().fill();
         this.getButtonTable().defaults().expandX().fill();
@@ -34,15 +34,16 @@ public class FileHandleView extends Dialog {
 
         this.setModal(true);
         this.skin = skin;
-        this.choosenFile = file;
+
+        this.fileNameField = new TextField(file_name, skin);
+        this.fileNameField.setDisabled(true);
     }
 
-    public FileHandleView(String title, Skin skin, String windowStyleName){
-        super(title, skin, windowStyleName);
-        this.setModal(true);
-        this.skin = skin;
+    public void showFileName() {
+        final Table table = new Table().top().left();
+        table.defaults().left();
+        table.row();
+        table.add(fileNameField).expandX().fillX();
+        this.getContentTable().add(table).maxWidth(400).expand().fill();
     }
-
-
-
 }

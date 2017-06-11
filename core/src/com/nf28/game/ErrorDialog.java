@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
- * Created by Kovalsky2099 on 09/06/2017.
+ * Created by Rachid Khalef on 09/06/2017.
  */
 
 public class ErrorDialog extends Dialog {

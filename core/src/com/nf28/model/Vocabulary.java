@@ -12,16 +12,6 @@ public class Vocabulary extends HashMap<String,String> {
     List<String> keys ;
 
     public Vocabulary(){
-        /*this.put("test","test");
-        this.put("test1","test1");
-        this.put("test2","test2");
-        this.put("test3","test3");
-        this.put("test4","test4");
-        this.put("test5","test5");
-        this.put("test6","test6");
-        this.put("test7","test7");
-        this.put("test8","test8");
-        this.put("test9","test9");*/
         keys =  new ArrayList<String>();
         refreshKeys();
     }
