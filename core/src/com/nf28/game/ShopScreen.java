@@ -142,7 +142,6 @@ public class ShopScreen implements Screen {
 
     }
     public void refresh(int page){
-        game.heros.setGold(1000);
         for(Image i : imageList) {
             i.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture("character/alpha.png"))));
             for(com.badlogic.gdx.scenes.scene2d.EventListener e : i.getListeners())
