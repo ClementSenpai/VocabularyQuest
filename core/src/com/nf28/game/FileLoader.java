@@ -64,7 +64,9 @@ public class FileLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        listVocabulary.refreshKeys();
+        listVocabulary.refreshAttaqueKeys();
+        listVocabulary.refreshDefenceKeys();
+
         return listVocabulary;
     }
 

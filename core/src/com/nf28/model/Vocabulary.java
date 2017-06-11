@@ -9,29 +9,42 @@ import java.util.Random;
  * Created by nicolas on 22/05/17.
  */
 public class Vocabulary extends HashMap<String,String> {
-    List<String> keys ;
+    List<String> attaquekeys ;
+    List<String> defencekeys ;
 
     public Vocabulary(){
-        keys =  new ArrayList<String>();
-        refreshKeys();
+        attaquekeys =  new ArrayList<String>();
+        defencekeys =  new ArrayList<String>();
+        refreshAttaqueKeys();
+        refreshDefenceKeys();
     }
 
-
-
-    public void refreshKeys(){
+    public void refreshAttaqueKeys(){
         for(String key:keySet())
-            keys.add(key);
+            attaquekeys.add(key);
+    }
+    public void refreshDefenceKeys(){
+        for(String value:values())
+            defencekeys.add(value);
     }
 
-    public String getWord(){
-        String key = keys.get(new Random().nextInt(keys.size()));
-        keys.remove(key);
-        if(keys.isEmpty())
-            refreshKeys();
+
+    public String getAttaqueWord(){
+        String key = attaquekeys.get(new Random().nextInt(attaquekeys.size()));
+        attaquekeys.remove(key);
+        if(attaquekeys.isEmpty())
+            refreshAttaqueKeys();
         return key;
     }
+    public String getDefenceWord(){
+        String value = defencekeys.get(new Random().nextInt(defencekeys.size()));
+        defencekeys.remove(value);
+        if(defencekeys.isEmpty())
+            refreshDefenceKeys();
+        return value;
+    }
 
-    public String[] getResponse(String key, int number){
+    public String[] getResponseAttaque(String key, int number){
         String[] possible_answer = new String[number];
         possible_answer[new Random().nextInt(number)]=get(key);
         List<String> values = new ArrayList<String>(values());
@@ -39,6 +52,24 @@ public class Vocabulary extends HashMap<String,String> {
             if(possible_answer[i]==null){
                 possible_answer[i] = values.get(new Random().nextInt(values.size()));
                 values.remove(possible_answer[i]);
+            }
+        }
+        return possible_answer;
+    }
+    public String[] getResponseDefence(String value, int number){
+        String[] possible_answer = new String[number];
+        String res=null;
+        for (Entry<String, String> entry : entrySet()) {
+            if (value.equals(entry.getValue())) {
+                res=entry.getKey();
+            }
+        }
+        possible_answer[new Random().nextInt(number)]=res;
+        List<String> keys = new ArrayList<String>(keySet());
+        for(int i=0;i<number;i++){
+            if(possible_answer[i]==null){
+                possible_answer[i] = keys.get(new Random().nextInt(keys.size()));
+                keys.remove(possible_answer[i]);
             }
         }
         return possible_answer;
