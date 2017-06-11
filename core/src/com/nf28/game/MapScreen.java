@@ -75,19 +75,8 @@ public class MapScreen implements Screen {
 
 
 
-        button_up =new TextButton("^" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "" +
-                "",skin);
+        button_up =new TextButton("^",skin);
         table.add(button_up ).width(BUTTON_SIZE).height(BUTTON_SIZE).padLeft(BUTTON_SIZE);
-        //button_up.addAction(Actions.rotateBy(90, 1));
         button_up.getLabel().setFontScale(5);
         table.row();
         button_left =new TextButton("<",skin);
@@ -97,7 +86,7 @@ public class MapScreen implements Screen {
         table.add(button_right).width(BUTTON_SIZE).height(BUTTON_SIZE);
         button_right.getLabel().setFontScale(5);
         table.row();
-        button_down =new TextButton("V",skin);
+        button_down =new TextButton("v",skin);
         table.add(button_down ).width(BUTTON_SIZE).height(BUTTON_SIZE).padLeft(BUTTON_SIZE);
         button_down.getLabel().setFontScale(5);
         table.row();
