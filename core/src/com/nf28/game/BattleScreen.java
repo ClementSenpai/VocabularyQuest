@@ -70,7 +70,7 @@ public class BattleScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 //        skin = new Skin( Gdx.files.internal( "ui/defaultskin.json" ));
         skin = new Skin( Gdx.files.internal( "skin/craftacular/skin/craftacular-ui.json" ));
-        background = new Sprite(new Texture("background/defaut.png"));
+        background = new Sprite(new Texture("background/bckp_defaut.png"));
         background.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         currentWord = vocab.getAttaqueWord();
         currentWordLabel = new Label(currentWord,skin);
