@@ -214,9 +214,9 @@ public class ShopScreen implements Screen {
         }
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            if(game.heros.getGold()>price) {
+            if(game.getOr()>price) {
                 game.heros.setImageUrl("character/" + this.url);
-                game.heros.setGold(game.heros.getGold() - price);
+                game.setOr(game.getOr() - price);
                 Preferences prefs = Gdx.app.getPreferences("cfg");
                 prefs.putInteger("gold", game.getOr());
                 prefs.putString("skin", game.heros.getImageUrl());

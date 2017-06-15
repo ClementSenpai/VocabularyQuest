@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<title>Vocabulary Quest</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+  body, html {
+    height: 100%;
+    line-height: 1.8;
+  }
+  /* Full height image header */
+  .bgimg-1 {
+    background-position: center;
+    background-size: cover;
+    background-image: url("./images/test.png");
+    min-height: 100%;
+  }
+  .w3-bar .w3-button {
+    padding: 16px;
+  }
+</style>
+<body>
+
+  <!-- Navbar (sit on top) -->
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-card-2" id="myNavbar">
+      <a href="#home" class="w3-bar-item w3-button w3-wide">VOCABULARY QUEST</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="#about" class="w3-bar-item w3-button"> OBJECTIFS</a>
+        <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> PRESENTATION</a>
+        <a href="#archi" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> ARCHITECTURE</a>
+        <a href="#evaluation" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> EVALUATIONS</a>
+        <a href="#limites" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> LIMITES</a>
+
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Sidebar on small screens when clicking the menu icon -->
+  <nav class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close &times;</a>
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">OBJECTIF</a>
+    <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">PRESENTATION</a>
+    <a href="#archi" onclick="w3_close()" class="w3-bar-item w3-button">ARCHITECTURE</a>
+    <a href="#evaluation" onclick="w3_close()" class="w3-bar-item w3-button">EVALUATIONS</a>
+    <a href="#limites" onclick="w3_close()" class="w3-bar-item w3-button">LIMITES</a>
+
+  </nav>
+
+  <!-- Header with full-height image -->
+  <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+    <div class="w3-display-left w3-text-white" style="padding:48px">
+      <span class="w3-jumbo w3-hide-small">Jouez en apprenant</span><br>
+      <span class="w3-xxlarge w3-hide-large w3-hide-medium">Commencez la quête</span><br>
+      <span class="w3-large">Enrichissez votre vocabulaire tout en participant a une aventure.</span>
+      <p><a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Commencer l'aventure</a></p>
+    </div> 
+  </header>
+
+  <!-- About Section -->
+  <div class="w3-container" style="padding:64px 16px" id="about">
+    <h2 class="w3-center">Objectifs du projets</h3>
+     <div class=" w3-center">
+    <h3>
+          <i class="fa fa-leaf"></i>
+          <a href="https://www.overleaf.com/9203147swxcgrdgnsqn#/33145052/">Voir le Cahier des charges</a>
+    </h3>
+    </div>
+    <p class="w3-center w3-large">Key features of our company</p>
+    <div class="w3-row-padding w3-center" style="margin-top:32px">
+      <div class="w3-quarter">
+        <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+        <p class="w3-large">Responsive</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Passion</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Design</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Support</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+    </div>
+    <div class="w3-row-padding w3-center" style="margin-top:32px">
+      <div class="w3-quarter">
+        <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+        <p class="w3-large">Responsive</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Passion</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Design</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Support</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Work Section -->
+  <div class="w3-container" style="padding-top:32px" id="work">
+    <h2 class="w3-center">Notre travail</h3>
+      <div class=" w3-center">
+        <h3>
+          <i class="fa fa-github"></i>
+          <a href="https://github.com/ClementSenpai/VocabularyQuest">Voir les sources</a>
+        </h3>
+      </div>
+
+      <div class="w3-container " style="margin-top:32px;">
+        <div class="w3-third">
+          <img src="./images/voc2.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+        </div>
+        <div class="w3-container w3-twothird">
+          <h3>Shop</h3>
+          <p class="w3-opacity">Designer</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+      </div>
+
+      <div class="w3-row-padding w3-container w3-white" style="margin-top:32px;">
+        <div class="w3-container w3-twothird">
+          <h3>Explore</h3>
+          <p class="w3-opacity">Designer</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+        <div class="w3-third">
+          <img src="./images/voc3.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+        </div>
+      </div>
+      <div class="w3-row-padding w3-container" style="margin-top:32px;">
+        <div class="w3-third">
+          <img src="./images/voc4.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+        </div>
+        <div class="w3-container w3-twothird">
+          <h3>Fight</h3>
+          <p class="w3-opacity">Designer</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+      </div>
+      <div class="w3-row-padding w3-container">
+       <div class="w3-container w3-gray w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+      <div class="w3-container w3-white w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+      <div class="w3-container w3-gray w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+    </div>
+    <div class="w3-row-padding w3-container">
+       <div class="w3-container w3-white w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+      <div class="w3-container w3-gray w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+      <div class="w3-container w3-white w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Skills Section -->
+<div class="w3-container w3-light-grey w3-padding-64" id="evaluation">
+  <div class="w3-row-padding">
+    <div class="w3-col m6">
+      <h2>Evaluations.</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>
+        tempor incididunt ut labore et dolore.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>
+          tempor incididunt ut labore et dolore.</p>
+        </div>
+        <div class="w3-col m6">
+          <p class="w3-wide"><i class="fa fa-camera w3-margin-right"></i>Photography</p>
+          <div class="w3-grey">
+            <div class="w3-container w3-dark-grey w3-center" style="width:90%">90%</div>
+          </div>
+          <p class="w3-wide"><i class="fa fa-desktop w3-margin-right"></i>Web Design</p>
+          <div class="w3-grey">
+            <div class="w3-container w3-dark-grey w3-center" style="width:85%">85%</div>
+          </div>
+          <p class="w3-wide"><i class="fa fa-photo w3-margin-right"></i>Photoshop</p>
+          <div class="w3-grey">
+            <div class="w3-container w3-dark-grey w3-center" style="width:75%">75%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing Section -->
+    <div class="w3-container w3-center w3-dark-grey" style="padding:128px 16px" id="limites">
+      <h3>Limites</h3>
+      <div class="w3-row-padding" style="margin-top:64px">
+        <div class="w3-third w3-section">
+          <ul class="w3-ul w3-white w3-hover-shadow">
+            <li class="w3-black w3-xlarge w3-padding-32">Vocabulaire</li>
+            <li class="w3-padding-16">Impossible d'<b>éditer</b> ses propres liste dans l'application</li>
+            <li class="w3-padding-16">Pas de support pour les <b>character speciaux</b> (Russe, accents ...)</li>
+            
+            
+          </ul>
+        </div>
+        <div class="w3-third w3-section">
+          <ul class="w3-ul w3-white w3-hover-shadow">
+            <li class="w3-red w3-xlarge w3-padding-32">Jeu</li>
+            <li class="w3-padding-16">Peu d'<b>intéractions</b>. Seulement de l'attaque defence</li>
+            <li class="w3-padding-16">Voir la <b>Correction</b> pour un apprentissage plus efficace.</li>
+            
+          </ul>
+        </div>
+        <div class="w3-third w3-section">
+          <ul class="w3-ul w3-white w3-hover-shadow">
+            <li class="w3-black w3-xlarge w3-padding-32">Interface</li>
+            <li class="w3-padding-16">Peu d'<b>animations</b></li>
+            <li class="w3-padding-16">Peu de <b>Personnalisation</b> du personnage</li>
+            <li class="w3-padding-16">Peu de <b>variété</b> dans les étages</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-64">
+      <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+      
+    </footer>
+
+    <script>
+      
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+}
+</script>
+
+</body>
+</html>

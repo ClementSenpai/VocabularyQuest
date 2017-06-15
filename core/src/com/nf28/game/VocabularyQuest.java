@@ -10,9 +10,7 @@ import com.nf28.model.Map;
 
 public class VocabularyQuest extends Game {
     MainMenuScreen mainMenuScreen;
-    ShopScreen shopScreen;
     MapScreen mapScreen;
-    BattleScreen battleScreen;
     Heros heros;
     Map map;
     int floor=0;

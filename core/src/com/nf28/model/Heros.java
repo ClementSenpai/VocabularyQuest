@@ -8,15 +8,6 @@ import com.nf28.ressource.HerosTemplate;
 public class Heros {
 
     int hp;
-    int gold;
-
-    public int getGold() {
-        return gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
 
     int level;
     int max_hp;
