@@ -31,11 +31,11 @@
       <a href="#home" class="w3-bar-item w3-button w3-wide">VOCABULARY QUEST</a>
       <!-- Right-sided navbar links -->
       <div class="w3-right w3-hide-small">
-        <a href="#about" class="w3-bar-item w3-button"> OBJECTIFS</a>
+        <a href="#objectif" class="w3-bar-item w3-button"><i class="fa-check-square fa"></i> OBJECTIFS</a>
         <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> PRESENTATION</a>
-        <a href="#archi" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> ARCHITECTURE</a>
-        <a href="#evaluation" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> EVALUATIONS</a>
-        <a href="#limites" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> LIMITES</a>
+        <a href="#archi" class="w3-bar-item w3-button"><i class="fa fa-cogs"></i> ARCHITECTURE</a>
+        <a href="#evaluation" class="w3-bar-item w3-button"><i class="fa fa-thumbs-up"></i> EVALUATIONS</a>
+        <a href="#limites" class="w3-bar-item w3-button"><i class="fa  fa-area-chart"></i> LIMITES</a>
 
       </div>
       <!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -49,7 +49,7 @@
   <!-- Sidebar on small screens when clicking the menu icon -->
   <nav class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close &times;</a>
-    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">OBJECTIF</a>
+    <a href="#objectif" onclick="w3_close()" class="w3-bar-item w3-button">OBJECTIF</a>
     <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">PRESENTATION</a>
     <a href="#archi" onclick="w3_close()" class="w3-bar-item w3-button">ARCHITECTURE</a>
     <a href="#evaluation" onclick="w3_close()" class="w3-bar-item w3-button">EVALUATIONS</a>
@@ -63,17 +63,17 @@
       <span class="w3-jumbo w3-hide-small">Jouez en apprenant</span><br>
       <span class="w3-xxlarge w3-hide-large w3-hide-medium">Commencez la quête</span><br>
       <span class="w3-large">Enrichissez votre vocabulaire tout en participant a une aventure.</span>
-      <p><a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Commencer l'aventure</a></p>
+      <p><a href="#objectif" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Commencer l'aventure</a></p>
     </div> 
   </header>
 
-  <!-- About Section -->
-  <div class="w3-container" style="padding:64px 16px" id="about">
+  <!-- Objectifs -->
+  <div class="w3-container" style="padding:64px 16px" id="objectif">
     <h2 class="w3-center">Objectifs du projets</h3>
      <div class=" w3-center">
     <h3>
-          <i class="fa fa-leaf"></i>
-          <a href="https://www.overleaf.com/9203147swxcgrdgnsqn#/33145052/">Voir le Cahier des charges</a>
+          <i class="fa fa-file-pdf-o"></i>
+          <a href="./memorygame.pdf">Voir le Cahier des charges</a>
     </h3>
     </div>
     <p class="w3-center w3-large">Key features of our company</p>
@@ -125,7 +125,85 @@
 
   
   <!-- Work Section -->
-  <div class="w3-container" style="padding-top:32px" id="work">
+  <div class="w3-container" style="padding-top:64px" id="work">
+    <h2 class="w3-center">Notre travail</h3>
+      <div class=" w3-center">
+        <h3>
+          <i class="fa fa-github"></i>
+          <a href="https://github.com/ClementSenpai/VocabularyQuest">Voir les sources</a>
+        </h3>
+      </div>
+
+      <div class="w3-container " style="margin-top:32px;">
+        <div class="w3-third">
+          <img src="./images/voc2.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+        </div>
+        <div class="w3-container w3-twothird">
+          <h3>Shop</h3>
+          <p class="w3-opacity">Designer</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+      </div>
+
+      <div class="w3-row-padding w3-container w3-white" style="margin-top:32px;">
+        <div class="w3-container w3-twothird">
+          <h3>Explore</h3>
+          <p class="w3-opacity">Designer</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+        <div class="w3-third">
+          <img src="./images/voc3.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+        </div>
+      </div>
+      <div class="w3-row-padding w3-container" style="margin-top:32px;">
+        <div class="w3-third">
+          <img src="./images/voc4.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+        </div>
+        <div class="w3-container w3-twothird">
+          <h3>Fight</h3>
+          <p class="w3-opacity">Designer</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+      </div>
+      <div class="w3-row-padding w3-container">
+       <div class="w3-container w3-gray w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+      <div class="w3-container w3-white w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+      <div class="w3-container w3-gray w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+    </div>
+    <div class="w3-row-padding w3-container">
+       <div class="w3-container w3-white w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+      <div class="w3-container w3-gray w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+      <div class="w3-container w3-white w3-third">
+        <h3>Autre fonctionnalité</h3>
+        <p class="w3-opacity">Designer</p>
+        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Achitechture-->
+<div class="w3-container" style="padding-top:64px" id="work">
     <h2 class="w3-center">Notre travail</h3>
       <div class=" w3-center">
         <h3>
@@ -265,12 +343,11 @@
     
     <!-- Footer -->
     <footer class="w3-center w3-black w3-padding-64">
-      <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+      <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Retour</a>
       
     </footer>
 
     <script>
-      
 // Modal Image Gallery
 function onClick(element) {
   document.getElementById("img01").src = element.src;
