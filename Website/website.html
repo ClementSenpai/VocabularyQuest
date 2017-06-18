@@ -68,7 +68,7 @@
   </header>
 
   <!-- Objectifs -->
-  <div class="w3-container" style="padding:64px 16px" id="objectif">
+  <div class="w3-container w3-dark-gray" style="padding:64px 16px" id="objectif">
     <h2 class="w3-center">Objectifs du projets</h3>
      <div class=" w3-center">
       <h3>
@@ -125,7 +125,7 @@
 
   
   <!-- Work Section -->
-  <div class="w3-container" style="padding-top:64px" id="work">
+  <div class="w3-container" style="padding-top:64px;font-size:150%;" id="work">
     <h2 class="w3-center">Notre travail</h2>
     <div class=" w3-center">
       <h3>
@@ -134,71 +134,64 @@
       </h3>
     </div>
 
-    <div class="w3-container " style="margin-top:32px;">
+    <div class="w3-container " style="margin-top:32px; ">
       <div class="w3-third">
         <img src="./images/voc2.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
       </div>
       <div class="w3-container w3-twothird">
-        <h3>Shop</h3>
-        <p class="w3-opacity">Designer</p>
-        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        <h2>La boutique</h2>
+        <p class="w3-opacity">Acheter tout ce dont vous avez besoin ici !</p>
+        <p>
+          Il s'agit là de l'écran boutique accessible à partir de l'écran titre, il permet au joueur de changer de personnage (ce qui n'a qu'une fonction décoratrice) ou d'acheter d'autres personnages avec l'argent gagner dans les précédentes parties. L'argent possédé est indiqué en bas, le prix est indiqué sous les personnages .</p>
+        </div>
       </div>
-    </div>
 
-    <div class="w3-row-padding w3-container w3-white" style="margin-top:32px;">
-      <div class="w3-container w3-twothird">
-        <h3>Explore</h3>
-        <p class="w3-opacity">Designer</p>
-        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <div class="w3-row-padding w3-container w3-white" style="margin-top:32px;">
+        <div class="w3-container w3-twothird">
+          <h2>Explorer un univers inconnu</h2>
+          <p class="w3-opacity">Designer</p>
+          <p>Le  joueur doit pouvoir se déplacer librement dans la carte. Ainsi, nous aurons 4 actions simples qui permettent de définir les libertés offertes au joueur. Il peut aller à droite, à gauche, en haut, en bas. Cependant ces actions ne sont possibles qu'en fonction de la structure de la map.  Les cartes sont créées de manière aleatoire pour que chaque partie soit une experience unique. Cela aura pour effet de créer une sensation d'aventure et de combat dont le but est de rendre l'apprentissage le plus ludique possible.Ici les cases claires ont déjà été visitées, les cases sombres sont les cases encore inexplorées, la case avec l'escalier permet d'aller à l'étage suivant. Les flèches situées en bas permettent aux héros de se déplacer. Une récapitulatif apparaît sous la carte pour indiquer la vie restante du héros ainsi que l'étage auquel il se situe.</p>
+        </div>
+        <div class="w3-third">
+          <img src="./images/voc3.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+        </div>
       </div>
-      <div class="w3-third">
-        <img src="./images/voc3.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+      <div class="w3-row-padding w3-container" style="margin-top:32px;">
+        <div class="w3-third">
+          <img src="./images/voc4.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+        </div>
+        <div class="w3-container w3-twothird">
+          <h2>Combattez l'ennemi</h2 >
+          <p class="w3-opacity">Surviviez au attques de monstre en tout genre</p>
+          <p>Le joueur doit pouvoir attaquer son ennemi. Cela se fait via la réponse aux questions de vocabulaire. Ici le gameplay reprend les bases du tour par tour. Le joueur devra garder son personnage en vie en se défendant et devra se défaire de son adversaire en l'attaquant. L'attaque et la défense se joue de la même façon : il faut choisir une réponse parmi un certain nombre de propositions. Une réponse correcte permet de retirer des points de vie à l'ennemi en cas d'attaque ou de ne pas en perdre soi même en défense. Il s'agit là de l'écran de combat qui arrive à chaque déplacement sur une case inexplorée occupée par un monstre. La partie supérieure est là uniquement à titre indicatif pour indiquer le nombre de points de vie du héros et de l'ennemie. La partie inférieur a été privilégiée pour les manipulations pour sa proximité avec le pouce. Dans la colonne de gauche se situe le mot à deviner, dans la colonne de droite les 4 propositions. Un appuie sur l'une des propositions la valide et effectue l'action (attaque/défense réussie selon le tour). Un récapitulatif pour savoir à quel tour on est se situe juste au dessus du mot à trouver. Un bouton autre se situe tout en bas pour les éventuels ajouts futurs.</p>
+        </div>
       </div>
-    </div>
-    <div class="w3-row-padding w3-container" style="margin-top:32px;">
-      <div class="w3-third">
-        <img src="./images/voc4.png" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="game">
+      <div class="w3-row-padding w3-container">
+       <div class="w3-container w3-dark-gray w3-half">
+        <h3>Import et création de listes vocabulaires</h3>
+        <p class="w3-opacity">Appropriez vous le jeu</p>
+        <p>Il est possible pour l'utilisateur de créer ses propres listes au format Json. A l'écran titre un bouton import est présent, il suffit alors de cliquer dessus afin d'avoir une fenêtre qui s'ouvre permettant de naviguer dans les dossiers du téléphone et de sélectionner le fichier json correspondant à liste de l'utilisateur.</p>
       </div>
-      <div class="w3-container w3-twothird">
-        <h3>Fight</h3>
-        <p class="w3-opacity">Designer</p>
-        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <div class="w3-container w3-white w3-half">
+        <h3>Allez le plus loin possible dans l'aventure</h3>
+        <p class="w3-opacity">Battez vos amis</p>
+        <p>Quel étage allez vous atteindre ? serez vous plus fort que vos amis ? Vous pouvez voir a tout moment votre etage actuel et voir quel est votre record.</p>
       </div>
+      
     </div>
     <div class="w3-row-padding w3-container">
-     <div class="w3-container w3-gray w3-third">
+     <div class="w3-container w3-white w3-half">
+      <h3>Du vocabulaire mais pas que</h3>
+      <p class="w3-opacity">Pas de limites a l'apprentissage !</p>
+      <p>Une épreuve d'histoire a reviser ? Rentrer vos propre question et reponse pour reviser ou apprendre ce que vous avez besoins.</p>
+    </div>
+    <div class="w3-container w3-dark-gray w3-half">
       <h3>Autre fonctionnalité</h3>
       <p class="w3-opacity">Designer</p>
       <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
     </div>
-    <div class="w3-container w3-white w3-third">
-      <h3>Autre fonctionnalité</h3>
-      <p class="w3-opacity">Designer</p>
-      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-    </div>
-    <div class="w3-container w3-gray w3-third">
-      <h3>Autre fonctionnalité</h3>
-      <p class="w3-opacity">Designer</p>
-      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-    </div>
+   
   </div>
-  <div class="w3-row-padding w3-container">
-   <div class="w3-container w3-white w3-third">
-    <h3>Autre fonctionnalité</h3>
-    <p class="w3-opacity">Designer</p>
-    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-  </div>
-  <div class="w3-container w3-gray w3-third">
-    <h3>Autre fonctionnalité</h3>
-    <p class="w3-opacity">Designer</p>
-    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-  </div>
-  <div class="w3-container w3-white w3-third">
-    <h3>Autre fonctionnalité</h3>
-    <p class="w3-opacity">Designer</p>
-    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-  </div>
-</div>
 </div>
 </div>
 
@@ -222,79 +215,79 @@
       <p class="w3-opacity">Le systeme d'exploitation mobile le plus utilisé</p>
       <p>Notre projet est avant tout un projet mobile. Nous avons donc choisi de travailler sur Android car plus facile a émuler et a tester car nous avons nous meme des téléphone android. De plus nous voulons que notre jeux sois accessible pour le plus de personnes possible.</p>
     </div>
-    <div class="w3-third">
-  <i style="font-size: 200px;" class="fa-5x fa fa-android"></i>    </div>
+    <div class="w3-third" style="text-align:center;">
+      <i style="font-size: 200px;" class="fa-5x fa fa-android"></i>    </div>
+    </div>
   </div>
-</div>
 
 
-<!-- Skills Section -->
-<div class="w3-container w3-light-grey w3-padding-64" id="evaluation">
-  <div class="w3-row-padding">
-    <div class="w3-col m6">
-      <h2>Evaluations.</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>
-        tempor incididunt ut labore et dolore.</p>
+  <!-- Skills Section -->
+  <div class="w3-container w3-light-grey w3-padding-64" id="evaluation">
+    <div class="w3-row-padding">
+      <div class="w3-col m6">
+        <h2>Evaluations.</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>
           tempor incididunt ut labore et dolore.</p>
-        </div>
-        <div class="w3-col m6">
-          <p class="w3-wide"><i class="fa fa-camera w3-margin-right"></i>Photography</p>
-          <div class="w3-grey">
-            <div class="w3-container w3-dark-grey w3-center" style="width:90%">90%</div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>
+            tempor incididunt ut labore et dolore.</p>
           </div>
-          <p class="w3-wide"><i class="fa fa-desktop w3-margin-right"></i>Web Design</p>
-          <div class="w3-grey">
-            <div class="w3-container w3-dark-grey w3-center" style="width:85%">85%</div>
-          </div>
-          <p class="w3-wide"><i class="fa fa-photo w3-margin-right"></i>Photoshop</p>
-          <div class="w3-grey">
-            <div class="w3-container w3-dark-grey w3-center" style="width:75%">75%</div>
+          <div class="w3-col m6">
+            <p class="w3-wide"><i class="fa fa-camera w3-margin-right"></i>Photography</p>
+            <div class="w3-grey">
+              <div class="w3-container w3-dark-grey w3-center" style="width:90%">90%</div>
+            </div>
+            <p class="w3-wide"><i class="fa fa-desktop w3-margin-right"></i>Web Design</p>
+            <div class="w3-grey">
+              <div class="w3-container w3-dark-grey w3-center" style="width:85%">85%</div>
+            </div>
+            <p class="w3-wide"><i class="fa fa-photo w3-margin-right"></i>Photoshop</p>
+            <div class="w3-grey">
+              <div class="w3-container w3-dark-grey w3-center" style="width:75%">75%</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Limites Section -->
-    <div class="w3-container w3-center w3-dark-grey" style="padding:128px 16px" id="limites">
-      <h3>Limites</h3>
-      <div class="w3-row-padding" style="margin-top:64px">
-        <div class="w3-third w3-section">
-          <ul class="w3-ul w3-white w3-hover-shadow">
-            <li class="w3-black w3-xlarge w3-padding-32">Vocabulaire</li>
-            <li class="w3-padding-16">Impossible d'<b>éditer</b> ses propres liste dans l'application</li>
-            <li class="w3-padding-16">Pas de support pour les <b>character speciaux</b> (Russe, accents ...)</li>
-            
-            
-          </ul>
-        </div>
-        <div class="w3-third w3-section">
-          <ul class="w3-ul w3-white w3-hover-shadow">
-            <li class="w3-red w3-xlarge w3-padding-32">Jeu</li>
-            <li class="w3-padding-16">Peu d'<b>intéractions</b>. Seulement de l'attaque defence</li>
-            <li class="w3-padding-16">Voir la <b>Correction</b> pour un apprentissage plus efficace.</li>
-            
-          </ul>
-        </div>
-        <div class="w3-third w3-section">
-          <ul class="w3-ul w3-white w3-hover-shadow">
-            <li class="w3-black w3-xlarge w3-padding-32">Interface</li>
-            <li class="w3-padding-16">Peu d'<b>animations</b></li>
-            <li class="w3-padding-16">Peu de <b>Personnalisation</b> du personnage</li>
-            <li class="w3-padding-16">Peu de <b>variété</b> dans les étages</li>
-          </ul>
+      <!-- Limites Section -->
+      <div class="w3-container w3-center w3-dark-grey" style="padding:128px 16px" id="limites">
+        <h3>Limites</h3>
+        <div class="w3-row-padding" style="margin-top:64px">
+          <div class="w3-third w3-section">
+            <ul class="w3-ul w3-white w3-hover-shadow">
+              <li class="w3-black w3-xlarge w3-padding-32">Vocabulaire</li>
+              <li class="w3-padding-16">Impossible d'<b>éditer</b> ses propres liste dans l'application</li>
+              <li class="w3-padding-16">Pas de support pour les <b>character speciaux</b> (Russe, accents ...)</li>
+
+
+            </ul>
+          </div>
+          <div class="w3-third w3-section">
+            <ul class="w3-ul w3-white w3-hover-shadow">
+              <li class="w3-red w3-xlarge w3-padding-32">Jeu</li>
+              <li class="w3-padding-16">Peu d'<b>intéractions</b>. Seulement de l'attaque defence</li>
+              <li class="w3-padding-16">Voir la <b>Correction</b> pour un apprentissage plus efficace.</li>
+
+            </ul>
+          </div>
+          <div class="w3-third w3-section">
+            <ul class="w3-ul w3-white w3-hover-shadow">
+              <li class="w3-black w3-xlarge w3-padding-32">Interface</li>
+              <li class="w3-padding-16">Peu d'<b>animations</b></li>
+              <li class="w3-padding-16">Peu de <b>Personnalisation</b> du personnage</li>
+              <li class="w3-padding-16">Peu de <b>variété</b> dans les étages</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-    
-    <!-- Footer -->
-    <footer class="w3-center w3-black w3-padding-64">
-      <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Retour</a>
-      
-    </footer>
 
-    <script>
+      <!-- Footer -->
+      <footer class="w3-center w3-black w3-padding-64">
+        <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Retour</a>
+
+      </footer>
+
+      <script>
 // Modal Image Gallery
 function onClick(element) {
   document.getElementById("img01").src = element.src;
